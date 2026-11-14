@@ -317,3 +317,81 @@ a.part-card:hover { border-color: var(--blue); transform: translateY(-2px); }
   body { background: #fff; }
   .card, .ex { box-shadow: none; }
 }
+
+/* ---------------- 我的标记 (marks.js) ---------------- */
+mark.hlm { padding: 0 1px; border-radius: 2px; cursor: pointer; }
+mark.hlm[data-color="y"] { background: #fff3a3; }
+mark.hlm[data-color="b"] { background: #cfe0ff; }
+mark.hlm[data-color="g"] { background: #d3f5d3; }
+mark.hlm.mk-flash { outline: 2px solid var(--blue); outline-offset: 1px; animation: mkflash 1.8s ease; }
+@keyframes mkflash {
+  0%, 60% { outline-color: var(--blue); box-shadow: 0 0 0 4px rgba(29,78,216,.18); }
+  100% { outline-color: transparent; box-shadow: none; }
+}
+
+#mkTip {
+  position: fixed; z-index: 400; display: flex; align-items: center; gap: 6px;
+  background: #fff; border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 10px; box-shadow: 0 4px 18px rgba(15,43,82,.16);
+  font-size: 13px;
+}
+#mkTip .mk-tip-lbl { color: var(--muted); font-size: 12px; }
+#mkTip button {
+  width: 22px; height: 22px; border-radius: 5px; border: 1px solid rgba(0,0,0,.15);
+  cursor: pointer; padding: 0;
+}
+#mkTip button.mk-note-btn {
+  width: auto; padding: 0 8px; background: var(--blue-soft); color: var(--blue-dark);
+  border-color: var(--blue-line); font-size: 12.5px; font-weight: 600; height: 24px;
+}
+#mkTip button:hover { filter: brightness(.96); border-color: var(--blue); }
+
+#mkBtn {
+  position: fixed; right: 22px; bottom: 76px; z-index: 320;
+  background: #fff; color: var(--blue-dark); border: 1px solid var(--blue-line);
+  border-radius: 20px; padding: 7px 14px; font-size: 13.5px; font-weight: 600;
+  cursor: pointer; box-shadow: var(--shadow); font-family: inherit;
+}
+#mkBtn:hover { background: var(--blue); color: #fff; }
+
+#mkPanel {
+  position: fixed; right: 22px; bottom: 122px; z-index: 340;
+  width: 330px; max-height: min(60vh, 520px); display: none; flex-direction: column;
+  background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(15,43,82,.18); overflow: hidden;
+  font-size: 13.5px;
+}
+#mkPanel.open { display: flex; }
+.mkp-head {
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+  border-bottom: 1px solid var(--line); background: var(--blue-soft);
+}
+.mkp-head b { color: var(--blue-deep); font-size: 14px; }
+.mkp-sub { color: var(--muted); font-size: 12px; flex: 1; }
+.mkp-head button {
+  border: 1px solid var(--blue-line); background: #fff; color: var(--blue-dark);
+  border-radius: 6px; font-size: 12px; padding: 2px 8px; cursor: pointer;
+}
+.mkp-head button:hover { background: var(--blue); color: #fff; }
+.mkp-body { overflow-y: auto; padding: 6px 10px 10px; }
+.mkp-empty { color: var(--muted); text-align: center; padding: 22px 10px; line-height: 1.9; }
+.mkp-group { margin-top: 8px; }
+.mkp-lec {
+  font-weight: 700; font-size: 12px; color: var(--blue); letter-spacing: .5px;
+  padding: 4px 4px 2px; border-bottom: 1px solid var(--blue-line); margin-bottom: 4px;
+}
+.mkp-lec .mkp-n { color: var(--muted); font-weight: 400; }
+.mkp-item { display: flex; gap: 8px; padding: 7px 4px; border-bottom: 1px dashed var(--line); align-items: flex-start; }
+.mkp-item:last-child { border-bottom: none; }
+.mkp-dot { width: 12px; height: 12px; border-radius: 3px; margin-top: 4px; flex: 0 0 12px; border: 1px solid rgba(0,0,0,.12); }
+.mkp-txt { flex: 1; min-width: 0; }
+.mkp-snippet { color: var(--ink); line-height: 1.55; word-break: break-all; }
+.mkp-note { color: var(--amber); font-size: 12.5px; margin-top: 2px; word-break: break-all; }
+.mkp-meta { color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+.mkp-ops { display: flex; flex-direction: column; gap: 4px; }
+.mkp-ops button {
+  border: 1px solid var(--line); background: #fff; color: var(--ink-2);
+  border-radius: 5px; font-size: 11.5px; padding: 1px 7px; cursor: pointer; white-space: nowrap;
+}
+.mkp-ops button:hover { border-color: var(--blue); color: var(--blue); }
+.mkp-ops button[data-del]:hover { border-color: var(--red); color: var(--red); }
