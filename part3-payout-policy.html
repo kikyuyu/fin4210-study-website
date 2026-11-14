@@ -1,0 +1,369 @@
+<div class="hero">
+  <div class="kicker">Part 3 · Lectures 10–11</div>
+  <h1>分配政策 Payout Policy</h1>
+  <p>公司赚到自由现金流之后，必须决定：把现金以什么形式、在什么时间、返还给股东多少？分配政策（Payout Policy）就是公司关于<span class="term">cash payout</span>的决策——它是融资决策的镜像（mirror image）：融资决策是<span class="en">how the firm raises cash</span>，分配政策则是<span class="en">how the firm returns cash to shareholders</span>。核心问题是：发放现金股利（dividends）还是回购股票（share repurchase）？支付率应该多高？</p>
+  <p>现实中的答案由三大市场摩擦决定：<span class="term">Taxes</span>（个人税收对股利与资本利得的不同待遇）、<span class="term">Cash Management / Agency</span>（管理层与股东之间的代理问题——超额现金如何被使用）、<span class="term">Signaling</span>（管理层与外部投资者之间的信息不对称——分配如何传递未来盈利的信号）。而在完美市场（perfect markets）中，<span class="term">MM 分配无关论（MM dividend irrelevance, 1961）</span>告诉我们：分配政策完全不影响公司价值——它是我们分析所有市场摩擦的基准（benchmark）。</p>
+  <div class="meta">
+    <span class="pill">Lecture 10 · Payout Methods &amp; MM Irrelevance</span>
+    <span class="pill">Lecture 11 · Taxes, Agency &amp; Signaling</span>
+    <span class="pill g">Berk &amp; DeMarzo Ch.17</span>
+  </div>
+</div>
+
+<h2 class="sec">知识地图 <span class="en-sub">Mind Map of Payout Policy</span></h2>
+<div class="card">
+  <div class="mmap">
+    <ul>
+      <li>
+        <span class="mm-t">分配方式 Payout Methods</span>
+        <span class="mm-l">现金返还的四种渠道</span>
+        <ul>
+          <li><span class="mm-t">Regular dividend 常规股利</span> <span class="mm-f">每季度支付、金额平滑</span></li>
+          <li><span class="mm-t">Special dividend 特别股利</span> <span class="mm-f">一次性，如 MSFT 2004 年 $3/股（共 $32B）</span></li>
+          <li><span class="mm-t">Stock split / stock dividend 拆股 / 股票股利</span> <span class="mm-f">股本数量增加，不改变总价值</span></li>
+          <li><span class="mm-t">Repurchase 股票回购</span> <span class="mm-f">open-market ≈95% · tender offer（溢价 10–20%）· targeted repurchase</span></li>
+        </ul>
+      </li>
+      <li>
+        <span class="mm-t">MM 分配无关论 MM Irrelevance (1961)</span>
+        <span class="mm-l">完美市场基准：投资政策既定，分配政策无关</span>
+        <ul>
+          <li><span class="mm-t">Homemade dividend 自制股利</span> <span class="mm-f">投资者可自行卖出股票造出任意现金流</span></li>
+          <li><span class="mm-t">Cum- vs Ex-dividend price</span> <span class="mm-f">\(P_{\text{cum}} - P_{\text{ex}} = DPS\)</span></li>
+        </ul>
+      </li>
+      <li>
+        <span class="mm-t">税收 Taxes</span>
+        <span class="mm-l">摩擦一：股利税高于且早于资本利得税</span>
+        <ul>
+          <li><span class="mm-t">Dividend tax disadvantage</span> <span class="mm-f">\(\tau_d &gt; \tau_g\)，且资本利得可递延至出售时</span></li>
+          <li><span class="mm-t">Dividend puzzle 股利之谜</span> <span class="mm-l">为何在税收劣势下仍发股利？</span></li>
+          <li><span class="mm-t">Clientele effect 追随者效应</span> <span class="mm-l">免税机构偏好股利，高税率个人偏好回购</span></li>
+        </ul>
+      </li>
+      <li>
+        <span class="mm-t">现金管理与代理成本 Cash Management &amp; Agency</span>
+        <span class="mm-l">摩擦二：管理层囤积现金搞帝国扩张</span>
+        <ul>
+          <li><span class="mm-t">Agency cost of equity</span> <span class="mm-f">管理层 perks、empire building（Harford 1999）</span></li>
+          <li><span class="mm-t">Retention vs Payout 决策规则</span> <span class="mm-f">只保留 NPV &gt; 0 项目所需现金，其余返还</span></li>
+        </ul>
+      </li>
+      <li>
+        <span class="mm-t">信号 Signaling</span>
+        <span class="mm-l">摩擦三：信息不对称下分配传递盈利信号</span>
+        <ul>
+          <li><span class="mm-t">Lintner model &amp; dividend smoothing</span> <span class="mm-f">\(Div_t = Div_{t-1} + s(\,p \cdot EPS_t - Div_{t-1})\)，\(s \approx 0.3\)</span></li>
+          <li><span class="mm-t">削减股利 = 坏消息</span> <span class="mm-l">sticky dividends，削减预示未来盈利下滑</span></li>
+          <li><span class="mm-t">回购信号较弱</span> <span class="mm-l">无长期承诺，但低价回购等于投资低估股票</span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h2 class="sec">§1 分配方式与关键日期 <span class="en-sub">Payout Methods &amp; Key Dates</span></h2>
+
+<h3 class="sub">1.1 股利 Dividends</h3>
+<div class="card">
+  <p><span class="term">Regular dividend（常规股利）</span>：公司按固定节奏（美国公司通常为<span class="term">每季度 quarterly</span>）支付的现金股利。公司极力保持其稳定甚至逐季微增——削减常规股利会向市场传递强烈负面信号（见 §5）。</p>
+  <p><span class="term">Special dividend（特别股利 / 一次性股利）</span>：<span class="en">A one-time dividend payment that the firm does not commit to repeating.</span> 用于处置一次性累积的超额现金。经典案例：<span class="term">Microsoft 2004 年宣布每股 $3 的特别股利</span>，合计约 <span class="term">$32 billion</span>——这是当时美国历史上最大规模的单笔公司分配。特别股利不会建立"持续支付"的预期，因此信号成本低于提高常规股利。</p>
+  <p><span class="term">Stock split（拆股）与 stock dividend（股票股利）</span>：<span class="en">An increase in the number of shares outstanding without any change in the firm's assets or cash flows.</span> 例如 2:1 拆股使股数翻倍、每股价格减半；10% 股票股利使每 10 股送 1 股。二者都不改变公司总价值，也不改变任何股东持股比例，只是把"饼"切成更多份。动机通常是降低每股名义价格以改善流动性，或向市场传递"管理层有信心股价将回到拆股前水平"的信号。</p>
+</div>
+
+<h3 class="sub">1.2 股票回购 Share Repurchase</h3>
+<div class="card">
+  <p>公司用现金在二级市场购回自己发行的股票。回购的股份通常被注销（retired），流通股本减少，每股价值上升。三种主要方式：</p>
+  <div class="tablewrap">
+    <table class="tb">
+      <tr><th>方式</th><th>机制</th><th>特征</th></tr>
+      <tr><td><b>Open-market repurchase</b><br>公开市场回购</td><td>在公开市场上像普通投资者一样逐步买入，通常授权额度内（如 "up to $10 billion"）在数月内执行</td><td>占全部回购的 <b>≈ 95%</b>；无溢价、无承诺、灵活性最高、信号最弱</td></tr>
+      <tr><td><b>Tender offer</b><br>要约回购</td><td>公司公开报价，按固定价格（或荷兰式拍卖价格区间）向全体股东要约收购固定数量股票</td><td>相对市价溢价通常 <b>10%–20%</b>；规模大、速度快；溢价传递管理层认为股价被低估的信号</td></tr>
+      <tr><td><b>Targeted repurchase</b><br>定向回购</td><td>与特定大股东私下协议购回其股份（常见于"绿色邮件" greenmail 谈判）</td><td>针对性强；可能涉及阻止敌意收购等特殊目的</td></tr>
+    </table>
+  </div>
+  <p class="src">数据来源：公开市场回购占比与要约溢价区间为 Berk &amp; DeMarzo《Corporate Finance》第 17 章的典型量级。</p>
+</div>
+
+<h3 class="sub">1.3 股利支付的关键日期 Key Dates</h3>
+<div class="card">
+  <p>公司宣布股利后，将依次经过四个日期。最重要的记忆点：<span class="term">必须在除息日（ex-dividend date）之前买入股票才能获得本次股利</span>——除息日当天及之后买入的投资者无权领取该股利。</p>
+  <div class="tablewrap">
+    <table class="tb">
+      <tr><th>日期</th><th>名称</th><th>含义</th></tr>
+      <tr><td class="num">①</td><td><b>Declaration date</b><br>宣告日</td><td>董事会正式宣布股利（金额、除息日、股权登记日、支付日）。宣告日市场开始把股利计入股价（cum-dividend price）</td></tr>
+      <tr class="hl"><td class="num">②</td><td><b>Ex-dividend date</b><br>除息日</td><td>在这一天<span class="term">之前</span>持有股票的股东才有权获得股利；除息日当天买入者无权领取。通常设在股权登记日前 <b>2 个营业日</b>（T+2 结算惯例）。除息日开盘价理论上恰好下跌 <span class="term">每股股利 DPS</span></td></tr>
+      <tr><td class="num">③</td><td><b>Record date</b><br>股权登记日</td><td>公司核对股东名册、确定"有权领取股利"的股东名单（需已结算过户）</td></tr>
+      <tr><td class="num">④</td><td><b>Payable / Distribution date</b><br>支付日</td><td>股利实际发放到股东账户（通常在登记日后约两周）</td></tr>
+    </table>
+  </div>
+  <div class="box note">
+    <div class="box-title">记忆要点 · Ex-dividend date</div>
+    <p class="en">To receive the dividend, you must own the stock BEFORE the ex-dividend date. Because settlement takes two business days, the ex-date is typically set two business days before the record date.</p>
+    <p>必须在除息日<b>之前</b>（strictly before）买入并持有才能获得股利。除息日开盘时，股价理论上下跌恰好等于每股股利 \(DPS\)——因为新买家不再享有这笔现金，公司价值中"含息"的部分被剥离。</p>
+  </div>
+</div>
+
+<h2 class="sec">§2 MM 分配无关论 <span class="en-sub">MM Dividend Irrelevance (1961)</span></h2>
+
+<div class="box theory">
+  <div class="box-title">定理 · MM Dividend Irrelevance</div>
+  <p class="en">In a perfect capital market (no taxes, no transaction costs, no asymmetric information, fixed investment policy), the firm's dividend policy is irrelevant: the initial firm value is unchanged by the choice between paying dividends and repurchasing shares, and the total wealth of each shareholder is identical under any payout method.</p>
+  <p>在完美市场中，公司先决定投资政策（investment policy），剩下的自由现金流（FCF）无论以股利还是回购的形式分配，都不会改变公司的初始价值，也不会改变任何一位股东的总财富。分配政策只决定"饼怎么切"，不影响"饼有多大"。</p>
+</div>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">2.1 完美市场的假设与逻辑链条</h3>
+  <p>MM 1961 的论证依赖完美资本市场假设（与 MM 资本结构命题同一套）：无税收、无交易成本、所有投资者价格接受者（竞争市场）、信息对称。关键推导链条：</p>
+  <ol>
+    <li><b>投资政策固定</b>：公司接受所有 NPV &gt; 0 的项目、拒绝所有 NPV &lt; 0 的项目。FCF 是给定的，分配只是 FCF 的去向问题。</li>
+    <li><b>公司价值 = 未来 FCF 的折现 + 当前超额现金</b>：当前持有现金属于股东，无论是否发放，其价值都归属于股东。</li>
+    <li><b>除息日价格恰好下跌 DPS</b>：除息前价格（<span class="term">cum-dividend price</span>）包含即将发放的股利；除息后价格（<span class="term">ex-dividend price</span>）不再包含。完美市场中价差恰为 \(DPS\)：
+      <div class="formula">\[ P_{\text{cum}} - P_{\text{ex}} = DPS \]</div>
+    </li>
+    <li><b>回购价格 = 含息价格</b>：若公司在除息前以低于含息价的价格回购，所有股东都会拒绝出售并等到除息后；均衡中回购价格必须等于含息价格 \(P_{\text{cum}}\)。因此回购后，剩余股东的每股价值不变。</li>
+    <li><b>股东总财富不变</b>：拿股利的股东得到 \(DPS\) 现金 + 下跌的股价；没卖股票的股东在回购后每股价值不变。两条路径财富完全相同。</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">2.2 自制股利 Homemade Dividends</h3>
+  <p class="en">In a perfect market, investors can create any desired cash flow themselves — by selling shares if the firm's payout is too low, or by reinvesting dividends to buy more shares if the payout is too high.</p>
+  <p>这是 MM 无关论最直观的力量：<span class="term">自制股利（homemade dividend）</span>。如果公司不发股利而投资者需要现金，他可以卖出若干股票；如果公司发股利而投资者不想现在缴税（现实摩擦），他可以用股利再买回股票维持持股比例。由于投资者总能"合成"任意现金流，公司层面的分配方式就无关紧要。注意：自制股利在现实中受<span class="term">交易成本</span>与<span class="term">不可分割股数</span>限制，因此只近似成立。</p>
+</div>
+
+<div class="ex">
+  <div class="ex-head">
+    <span class="ex-no">例 3-1</span>
+    <span class="ex-title">Genron 公司：股利 vs 回购的完全等价</span>
+    <span class="ex-tag">MM Irrelevance · 数值推演</span>
+  </div>
+  <div class="ex-body">
+    <div class="q-en"><b>Question (English):</b> Genron is an all-equity firm with 10 million shares outstanding. It holds $20 million in excess cash and expects free cash flows of $50 million per year starting next year, growing at 0%. The equity cost of capital is r<sub>E</sub> = 12%. The board is deciding between (a) paying a special dividend of $2 per share and (b) repurchasing $20 million of stock at the fair market price. Show that shareholder wealth is identical under both policies.</div>
+    <div class="q-zh"><b>题目：</b>Genron 为全权益公司，流通 1,000 万股，账上持有 2,000 万美元超额现金，此后每年自由现金流 5,000 万美元（零增长），股权资本成本 \(r_E = 12\%\)。董事会正在考虑：(a) 发放每股 $2 的特别股利；(b) 以公允市价回购 2,000 万美元股票。证明两种方案下股东财富完全相同。</div>
+    <details class="ans">
+      <summary>查看解答 / Answer</summary>
+      <div class="ans-body">
+        <p><b>第一步：计算含息总价值与每股含息价格（政策无关）。</b>无论分配方式如何，公司价值 = 超额现金 + 未来 FCF 的永续年金现值：</p>
+        <div class="formula">\[ V = 20 + \frac{50}{0.12} = 20 + 416.67 = 436.67 \text{（百万美元）} \]</div>
+        <div class="formula">\[ P_{\text{cum}} = \frac{436.67}{10} = \$43.67 \text{ / 股} \]</div>
+        <p><b>第二步：方案 (a) 每股 $2 股利。</b>共支付 \(2 \times 10 = 20\)（百万美元），恰好用完超额现金。除息后：</p>
+        <div class="formula">\[ P_{\text{ex}} = 43.67 - 2 = \$41.67 \]</div>
+        <p>股东每股财富 = 股利 $2.00 + 股价 $41.67 = <b>$43.67</b>，与含息价完全一致。✓</p>
+        <p><b>第三步：方案 (b) 回购 $20M。</b>按含息价 $43.67 回购，可购回股数：</p>
+        <div class="formula">\[ N_{\text{buy}} = \frac{20}{43.67} = 0.4580 \text{（百万股）} \approx 458{,}016 \text{ 股} \]</div>
+        <p>回购花掉了全部现金，公司只剩经营资产价值 $416.67M，剩余股数 \(10 - 0.4580 = 9.5420\) 百万股，回购后每股价格：</p>
+        <div class="formula">\[ P_{\text{post}} = \frac{416.67}{9.5420} = \$43.67 \]</div>
+        <p>价格纹丝不动。选择卖出股票的股东按 $43.67/股拿到现金；选择留下的股东每股仍值 $43.67。<b>两条路径每股财富均恰为 $43.67。</b>✓</p>
+        <p><b>第四步（代数直觉）：</b>回购价格必须等于含息价格。若公司试图以 \(P &lt; 43.67\) 回购，没有股东愿意在除息前卖出（等到除息后每股只值 \(43.67 - 2 = 41.67\)…… 注意比较口径），均衡中无人供股，公司无法完成回购；若 \(P &gt; 43.67\)，所有股东都抢着卖出，公司必须抬高价格直至等于含息价。故完美市场中回购不创造额外价值。</p>
+        <div class="ans-en"><b>Answer (English):</b> Cum-dividend value is $20M + $50M/0.12 = $436.67M, or $43.67 per share. A $2 special dividend drops the price to $41.67; wealth per share stays $43.67. Repurchasing $20M at $43.67 retires ≈ 458,016 shares, leaving 9.542M shares backed by $416.67M of operating assets — the price is unchanged at $43.67. Shareholder wealth is identical under both policies, illustrating MM dividend irrelevance.</div>
+        <div class="ans-zh"><b>中文结论：</b>完美市场中，分配方式（股利或回购）只改变股东财富的"构成"（现金 vs 股票），不改变"总量"。公司初始价值在分配决策宣布前后不变。这正是分析税收、代理、信号三大摩擦的基准（benchmark）。</div>
+        <div class="pitfall"><b>常见错误：</b>不要写成"回购推高了股价"。回购后每股价格不变（$43.67 → $43.67）；提高的是"每股内在价值对应的所有者权益集中度"，不是价格本身。每股价值的提升来自"分母（股数）与分子（现金）同比例减少"，比例恰为每股含息价。</div>
+      </div>
+    </details>
+  </div>
+</div>
+<p class="src">原型提示 · 2025 Q4 期末卷曾以 Genron 为原型考察 MM 无关论的数值等价性（含息价、除息价、回购股数三重计算）。</p>
+
+<h2 class="sec">§3 税收与分配政策 <span class="en-sub">Taxes and Payout Policy</span></h2>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">3.1 股利的税收劣势 Dividend Tax Disadvantage</h3>
+  <p>现实中，股利与资本利得（capital gains）在美国税制下长期适用不同税率，且征税时点不同：</p>
+  <div class="tablewrap">
+    <table class="tb">
+      <tr><th></th><th>Dividends 股利</th><th>Capital Gains 资本利得</th></tr>
+      <tr><td><b>税率（历史高点）</b></td><td>普通所得最高 <b>39.6%</b>（股利并入个人所得税）；合格股利（qualified dividends）优惠税率 15% / 20%</td><td>长期资本利得 <b>15% / 20%</b></td></tr>
+      <tr class="hl"><td><b>征税时点</b></td><td>发放当年即征税——<b>不可递延</b></td><td>仅在<b>出售</b>股票时征税——<b>可无限递延</b>（"递延即免税的一部分" deferral benefit）</td></tr>
+    </table>
+  </div>
+  <p>用 \(\tau_d\) 表示股利有效税率、\(\tau_g\) 表示资本利得税率，比较"公司把 $1 作为股利发给股东"与"公司留存 $1（股东以未实现资本利得形式持有）"的税后价值：</p>
+  <div class="formula">\[ \$1 \text{ dividend} \;\longrightarrow\; (1 - \tau_d) \quad \text{vs.} \quad \$1 \text{ retained} \;\longrightarrow\; (1 - \tau_g) \]</div>
+  <p class="en">A dollar of retained earnings is worth more after tax than a dollar of dividends whenever τ<sub>g</sub> &lt; τ<sub>d</sub> — and capital gains taxation can in addition be deferred until sale, which further favors retention.</p>
+  <p>只要 \(\tau_g &lt; \tau_d\)，留存一美元的税后价值就严格高于发放一美元；何况资本利得还可以递延至出售时才纳税，进一步放大股利的税收劣势。因此，<b>仅考虑个人税收，公司应当少发股利、用回购代替</b>——这也是为什么过去 30 年美国公司的回购规模持续超过股利。</p>
+</div>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">3.2 数值示例：$1 的两种命运</h3>
+  <p>设某高税率投资者 \(\tau_d = 40\%\)（股利按普通所得征税）、\(\tau_g = 20\%\)：</p>
+  <div class="tablewrap">
+    <table class="tb">
+      <tr><th>路径</th><th>税后即刻价值</th><th>后续</th></tr>
+      <tr><td>公司发放 $1 股利</td><td class="num">\(1 \times (1-0.40) = \$0.60\)</td><td>已立即征税，再投资的增长部分未来还要按资本利得纳税</td></tr>
+      <tr class="hl"><td>公司留存 $1（股价隐含增值）</td><td class="num">隐含价值 \(\$1\)，出售时 \(1 \times (1-0.20) = \$0.80\)</td><td>增值部分按 20% 征税，且<b>出售前不纳税</b>——递延期间相当于获得无息占用税款的收益</td></tr>
+    </table>
+  </div>
+  <p>即使忽略递延收益，留存路径的终值税后价值（$0.80）也高出股利路径（$0.60）达 33%。这就是个人税收层面支持"回购优于股利"的核心算术。</p>
+</div>
+
+<div class="box key">
+  <div class="box-title">Dividend Puzzle 股利之谜</div>
+  <p class="en">Given the tax disadvantage of dividends, why do firms continue to pay them — indeed, why did dividends historically dominate repurchases?</p>
+  <p>既然股利存在税收劣势，为什么公司（特别是 1982 年 SEC Rule 10b-18 放宽回购管制之前）仍长期大量发放股利？学界提出三类互补解释，恰好对应三大摩擦：</p>
+  <ul>
+    <li><b>Clientele effect（§3.3）</b>：不同税率档次的投资者对股利/回购的偏好不同，公司按"顾客"定位自己的政策，股利并非对所有人都有税收劣势；</li>
+    <li><b>Signaling（§5）</b>：股利是承诺性的优质信号，税收成本本身就是"烧钱证明"（costly signal）的一部分；</li>
+    <li><b>Agency（§4）</b>：分配掉超额现金可减少管理层滥用，此治理收益可能超过税收成本。</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">3.3 追随者效应 Clientele Effect</h3>
+  <p class="en">The clientele effect: investors with different tax rates self-select into stocks whose payout policies match their tax preferences; a firm attracts the clientele of investors who value its payout policy most.</p>
+  <p><span class="term">追随者效应（clientele effect）</span>：处于不同税收档位的投资者会"各取所需"地持有不同派息政策的股票。典型分布：</p>
+  <div class="tablewrap">
+    <table class="tb">
+      <tr><th>投资者类型</th><th>税收状况</th><th>偏好的分配政策</th></tr>
+      <tr><td>养老基金、退休账户（401(k)、IRA）、主权基金</td><td>免税或税收递延</td><td class="num"><b>偏好高股利</b>——无税收劣势，股利是稳定现金流；utility stocks 与 REITs 的高派息正迎合此类顾客</td></tr>
+      <tr class="hl"><td>高边际税率个人投资者</td><td>股利按最高档征税</td><td class="num"><b>偏好回购 / 低派息成长股</b>——把收益保留在股价里递延纳税</td></tr>
+    </table>
+  </div>
+  <p>实证含义：公司不应轻易剧烈改变派息政策——这样做会赶走原有"顾客"（他们卖出股票时产生交易成本与潜在税负），替换成本很高。这也是解释 <b>dividend smoothing</b>（§5）的另一视角。</p>
+</div>
+
+<h2 class="sec">§4 现金管理、代理成本与超额现金 <span class="en-sub">Cash Management and the Agency Cost of Equity</span></h2>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">4.1 为什么"留着钱"可能毁损价值</h3>
+  <p class="en">Managers of firms with excessive cash may pursue empire building — investing in negative-NPV acquisitions or perquisites — rather than returning cash to shareholders. Harford (1999) finds that cash-rich firms are more likely to make value-destroying acquisitions.</p>
+  <p>管理层与股东之间存在<span class="term">代理成本（agency cost of equity）</span>：管理层偏好公司规模（empire building，帝国扩张）——公司越大，其权力、薪酬、职业声望越高——即使扩张项目是负 NPV 的。<b>Harford（1999）</b>的经典实证发现：现金充裕的公司更可能发起摧毁价值的并购。此外，超额现金还供养管理层特权消费（perquisites）。</p>
+  <p>管理层也有正当理由保留现金：<span class="term">财务灵活性（financial flexibility）</span>——避免在好项目出现时被迫进行高成本的外部融资（外部融资存在发行成本与信息不对称溢价，见 Part 2）。因此，留存决策是"灵活性收益"与"代理成本"的权衡。决策规则非常简洁：</p>
+  <div class="box key">
+    <div class="box-title">分配政策的公司层面决策规则</div>
+    <p>先保留<b>所有 NPV &gt; 0 项目</b>所需的资金；超额现金（excess cash）的每一美元都应在"再投资（其 NPV）"与"返还给股东"之间比较——只要没有正的 NPV 用途，就应分配给股东，让股东自己去寻找最好的投资机会。</p>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-head">
+    <span class="ex-no">例 3-2</span>
+    <span class="ex-title">Altgreen：扩张项目 vs 全额派现</span>
+    <span class="ex-tag">Agency / Retention vs Payout</span>
+  </div>
+  <div class="ex-body">
+    <div class="q-en"><b>Question (English):</b> Altgreen has 250 million shares outstanding, $300 million in excess cash, and expects free cash flow of $150 million per year (zero growth). Its cost of capital is r = 7%. Management proposes spending all the cash on an expansion project that would raise annual FCF by 10% (to $165 million forever). Alternatively, the firm could distribute the $300 million to shareholders. Which option creates more value? If distributing, show the effect of a repurchase.</div>
+    <div class="q-zh"><b>题目：</b>Altgreen 有 2.5 亿股流通，持有 3 亿美元超额现金，预期每年自由现金流 1.5 亿美元（零增长），资本成本 \(r = 7\%\)。管理层提议把全部现金投入一个扩张项目，使年 FCF 永久提高 10%（至 1.65 亿美元）；或者公司把 3 亿美元全部分配给股东。哪个方案创造价值更高？若分配，演示回购的效果。</div>
+    <details class="ans">
+      <summary>查看解答 / Answer</summary>
+      <div class="ans-body">
+        <p><b>第一步：计算"全部分配"方案的公司价值。</b>现金在股东手中与在公司账上等值，故：</p>
+        <div class="formula">\[ V_{\text{payout}} = 300 + \frac{150}{0.07} = 300 + 2{,}142.86 = \$2{,}442.86 \text{M} \]</div>
+        <p><b>第二步：计算"全额扩张"方案的公司价值。</b>现金全部投入，账上无现金，FCF 永久变为 $165M/年：</p>
+        <div class="formula">\[ V_{\text{expansion}} = \frac{165}{0.07} = \$2{,}357.14 \text{M} \]</div>
+        <p><b>第三步：直接计算扩张项目的 NPV（更清晰的判别法）。</b></p>
+        <div class="formula">\[ NPV_{\text{exp}} = \underbrace{\frac{165-150}{0.07}}_{\text{新增 FCF 的现值}} - \underbrace{300}_{\text{机会成本：现金}} = 214.29 - 300 = -\$85.71 \text{M} \]</div>
+        <p>NPV 为 <b>−$85.71M</b> &lt; 0，即扩张摧毁价值；与两方案价值之差 \(2442.86 - 2357.14 = 85.72\)（百万美元）完全吻合（四舍五入差异）。<b>应选择分配。</b>✓ 这正是代理问题的典型场景：管理层有动机做"让公司更大"的扩张，但股东财富最大化要求派现。</p>
+        <p><b>第四步：若用回购分配 $300M。</b>分配前每股价格：</p>
+        <div class="formula">\[ P = \frac{2{,}442.86}{250} = \$9.7714 \text{ / 股} \]</div>
+        <p>按 $9.7714 回购，购回股数：</p>
+        <div class="formula">\[ N_{\text{buy}} = \frac{300}{9.7714} = 30.70 \text{（百万股）} \]</div>
+        <p>剩余股数 \(250 - 30.70 = 219.30\) 百万股，公司只剩经营资产 \(150/0.07 = 2{,}142.86\) M：</p>
+        <div class="formula">\[ P_{\text{post}} = \frac{2{,}142.86}{219.30} = \$9.7714 \]</div>
+        <p>回购后价格不变，每股财富仍为 $9.7714——完美市场中回购按公允价执行不创造、也不毁灭价值，它只是把价值以现金形式转移给选择出售的投资者。</p>
+        <div class="ans-en"><b>Answer (English):</b> Payout yields $300M + $150M/0.07 = $2,442.86M, versus $165M/0.07 = $2,357.14M for the expansion. The expansion's NPV is ($15M/0.07) − $300M = −$85.71M &lt; 0, so the firm should distribute the cash. Repurchasing $300M at $9.77 buys back ≈30.70M shares; the price remains $9.77 after the repurchase.</div>
+        <div class="ans-zh"><b>中文结论：</b>扩张使 FCF 提高 10%，听起来诱人，但其现值增量（$214.29M）盖不住 3 亿美元现金的机会成本。NPV &lt; 0 的项目无论用"内部现金"还是"外部融资"都要拒绝——内部现金同样有成本（股东本可拿到它）。管理层扩张动机若不受约束，就是 empire building 的代理成本。</div>
+        <div class="pitfall"><b>常见错误：</b>① 把"FCF 提高 10%"直接当作项目收益而忘记扣除 $300M 成本；② 认为"用自己的现金不用付成本"——内部资金的机会成本就是分配方案下股东可得的现值；③ 认为回购会推高股价——完美市场中公允价回购后价格不变。</div>
+      </div>
+    </details>
+  </div>
+</div>
+<p class="src">原型提示 · 2025 Q4 期末卷曾以 Altgreen 为原型考察"留存 vs 分配"的 NPV 判别与回购后价格不变性。</p>
+
+<div class="box warn">
+  <div class="box-title">延展 · 该留多少现金？</div>
+  <p>现实中公司通常持有超过零的现金缓冲，原因包括：财务灵活性（抓住突发的正 NPV 机会）、避免外部融资成本与窘境（Part 2 的信息不对称溢价）、税务/跨国资金汇回成本等。最优现金持有是"边际灵活性收益 = 边际代理成本 + 边际持有成本"的权衡——而派息/回购正是把超出最优水平的现金返还股东的机制。</p>
+</div>
+
+<h2 class="sec">§5 信号：用分配传递信息 <span class="en-sub">Signaling with Payouts</span></h2>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">5.1 信息不对称与股利信号假说</h3>
+  <p class="en">Dividend signaling hypothesis: under asymmetric information, dividend changes convey managers' private information about future earnings to the market. Because raising dividends commits the firm to sustained payments, only firms confident of future cash flows can afford it; cutting dividends is interpreted as very bad news.</p>
+  <p>管理层比外部投资者更了解公司前景（asymmetric information）。<span class="term">股利信号假说（dividend signaling hypothesis）</span>认为：分配政策是低成本之外仍可信的信息通道——提高股利等于管理层公开押注未来现金流足以支撑更高的持续分配；反之，<b>削减股利会被市场解读为未来盈利大幅下滑的强信号</b>，通常伴随显著负面股价反应。这使股利具有"粘性"（sticky）：不到万不得已绝不削减。</p>
+</div>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">5.2 Lintner 模型与股利平滑 Dividend Smoothing</h3>
+  <p><span class="term">Lintner（1956）</span>通过对公司经理的访谈与实证研究归纳出两条典型化事实（stylized facts）：</p>
+  <ol>
+    <li>公司设有<b>长期目标派息率</b>（target payout ratio）\(p\)，典型约为 <b>50%</b>——即长期而言股利约等于 EPS 的一半；</li>
+    <li>实际股利向目标值<b>渐进调整</b>，调整速度系数（speed of adjustment）\(s\) 典型约为 <b>0.3</b>——每年只弥合目标缺口（gap）的 30% 左右。</li>
+  </ol>
+  <div class="formula">\[ \text{Target}_t = p \times EPS_t, \qquad Div_t = Div_{t-1} + s \times \left( \text{Target}_t - Div_{t-1} \right) \]</div>
+  <p class="en">Equivalently: ΔDiv<sub>t</sub> = s · (p · EPS<sub>t</sub> − Div<sub>t−1</sub>). Dividends therefore lag and smooth earnings — they are much less volatile than EPS, and managers avoid decreases.</p>
+  <p>该式也可写为股利增量形式 \(\Delta Div_t = s\,(p \cdot EPS_t - Div_{t-1})\)。股利因而比 EPS 平滑得多：盈利暴涨时股利只小幅上调，盈利下滑时股利尽量不动。实证上，股利削减公告后的平均异常收益率约为 −10%，而同等幅度增加只带来约 +1%——不对称的反应正是"削减 = 坏消息"的证据。</p>
+</div>
+
+<div class="ex">
+  <div class="ex-head">
+    <span class="ex-no">例 3-3</span>
+    <span class="ex-title">Lintner 调整：盈利跳升时股利涨多少？</span>
+    <span class="ex-tag">Dividend Smoothing · 数值推演</span>
+  </div>
+  <div class="ex-body">
+    <div class="q-en"><b>Question (English):</b> SmoothCo's EPS jumped from $2.00 to $3.00 per share. Last year's dividend was $1.00 per share. The firm's target payout ratio is p = 50% and its speed of adjustment is s = 0.30, consistent with Lintner (1956). Compute this year's dividend and the dividend increase.</div>
+    <div class="q-zh"><b>题目：</b>SmoothCo 的 EPS 由 $2.00 跳升至 $3.00，上年每股股利为 $1.00。公司目标派息率 \(p = 50\%\)，调整速度系数 \(s = 0.30\)（符合 Lintner 典型值）。计算本年每股股利及股利增幅。</div>
+    <details class="ans">
+      <summary>查看解答 / Answer</summary>
+      <div class="ans-body">
+        <ol class="steps">
+          <li><b>计算目标股利：</b>\(\text{Target}_t = p \times EPS_t = 0.50 \times 3.00 = \$1.50\)。</li>
+          <li><b>计算目标缺口：</b>\(\text{Target}_t - Div_{t-1} = 1.50 - 1.00 = \$0.50\)。</li>
+          <li><b>按调整速度弥合缺口：</b>\(\Delta Div_t = s \times 0.50 = 0.30 \times 0.50 = \$0.15\)。</li>
+          <li><b>本年股利：</b>\(Div_t = 1.00 + 0.15 = \boxed{\$1.15}\)，同比增长 15%。</li>
+        </ol>
+        <p><b>解读：</b>EPS 暴涨 50%，但股利仅上调 15%——这就是平滑。若来年 EPS 站稳 $3.00，再按同规则调整：缺口 \(1.50 - 1.15 = 0.35\)，\(\Delta Div = 0.30 \times 0.35 = 0.105\)，股利升至 $1.255…… 股利以几何速度逼近目标值 \(1.50\)。</p>
+        <div class="ans-en"><b>Answer (English):</b> Target = 0.50 × $3.00 = $1.50. Adjustment = 0.30 × ($1.50 − $1.00) = $0.15. New dividend = $1.15 per share (+15%), versus a +50% jump in EPS — dividends are smoothed relative to earnings.</div>
+        <div class="ans-zh"><b>中文结论：</b>Lintner 模型说明股利是管理层对未来可持续盈利的"承诺性信号"，因此变化谨慎、逐期收敛到目标派息率。预测或估值中不要假设股利与 EPS 同步变动。</div>
+        <div class="pitfall"><b>常见错误：</b>① 直接把股利设为 \(0.5 \times EPS = 1.50\)（忽略了平滑调整）；② 把 \(s\) 误用为派息率；③ 认为 EPS 上涨 50% 股利就该上涨 50%。</div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="card">
+  <h3 class="sub" style="margin-top:0">5.3 回购的信号：更弱，但有时更便宜</h3>
+  <p class="en">Repurchases are a weaker signal than dividend increases because they carry no commitment to repeat. However, repurchasing shares when the stock is undervalued is itself a positive-NPV investment for remaining shareholders; in equilibrium, only undervalued firms find it optimal to repurchase, so a repurchase announcement still conveys positive information.</p>
+  <p>与股利相比，<span class="term">回购信号较弱</span>：开放式回购没有"年年回购"的承诺，可随现金流状况伸缩，因此"烧钱证明"的力度不如提高股利。但回购有独特的信号逻辑：<b>当管理层认为股价被低估时回购，等于用公司的钱投资自己低估的股票——这对留存股东是正 NPV 交易</b>。均衡逻辑：高估或股价公允的公司回购会摧毁价值（为"买贵"付钱），只有真正低估的公司才有动机大规模回购，故回购公告仍传递正面信息，只是强度与持续性弱于股利上调。</p>
+  <div class="box note">
+    <div class="box-title">三类信号强度的排序</div>
+    <p>信号承诺强度：<b>提高常规股利 ＞ 特别股利 ＞ 要约回购（溢价）＞ 公开市场回购</b>。承诺越强，可信度和信号成本越高；灵活性则相反。公司在"可信度"与"灵活性"之间做选择。</p>
+  </div>
+</div>
+
+<h2 class="sec">§6 常见误区 <span class="en-sub">Common Pitfalls</span></h2>
+<div class="box warn">
+  <div class="box-title">分配政策四大高频误区</div>
+  <ol>
+    <li><b>误以为回购会机械推高股价。</b>完美市场中公允价回购后<b>每股价格不变</b>（例 3-1：$43.67 → $43.67；例 3-2：$9.7714 → $9.7714）。分子（公司价值）与分母（股数）按同一比例缩减。价格变化只可能来自摩擦（低估回购是正 NPV、税收、信号）。</li>
+    <li><b>混淆含息价与除息价。</b>股利宣告后至除息日前交易的是含息价 \(P_{\text{cum}}\)；除息日价格理论上恰好下跌 \(DPS\)。做题时先问"这是含息还是除息口径"，再决定分子中是否含本次股利。</li>
+    <li><b>把个人税与公司税混为一谈。</b>分配政策分析中的税收是<b>投资者层面</b>的个人所得税（\(\tau_d\) vs \(\tau_g\)）；公司层面 classical tax system 下股利还存在双重征税（公司先缴企业所得税，股东再缴股利税），这进一步加剧股利税收劣势，但不要把 \(\tau_c\) 直接加进 MM 无关论的公式里当同一个东西处理。</li>
+    <li><b>认为"信号假说"推翻了"MM 无关论"。</b>两者并不矛盾：MM 是<b>完美市场基准</b>（分配不改变价值）；信号假说引入信息不对称这一摩擦，说明分配可以<b>通过改变投资者对价值的认知</b>而影响价格——价格动是因为信息内容，不是因为分配行为本身创造价值。</li>
+  </ol>
+</div>
+
+<h2 class="sec">§7 关键术语 <span class="en-sub">Key Terms · 中英对照</span></h2>
+<div class="card">
+  <div class="terms">
+    <div class="trow"><span class="en-t">Payout policy</span><span class="zh-t">分配政策：公司把自由现金流以股利或回购形式返还给股东的决策，是融资决策的镜像</span></div>
+    <div class="trow"><span class="en-t">Regular dividend</span><span class="zh-t">常规股利：按固定节奏（通常每季度）支付的现金股利，金额平滑、不轻易削减</span></div>
+    <div class="trow"><span class="en-t">Special dividend</span><span class="zh-t">特别股利：一次性大额股利，不承诺重复（如 MSFT 2004，$3/股、共 $32B）</span></div>
+    <div class="trow"><span class="en-t">Stock split / stock dividend</span><span class="zh-t">拆股 / 股票股利：股数增加、每股价格同比例下降，不改变公司总价值与持股比例</span></div>
+    <div class="trow"><span class="en-t">Open-market repurchase</span><span class="zh-t">公开市场回购：在二级市场逐步买入自家股票，约占全部回购的 95%，信号最弱</span></div>
+    <div class="trow"><span class="en-t">Tender offer</span><span class="zh-t">要约回购：公开报价向全体股东收购固定数量股票，溢价通常 10%–20%</span></div>
+    <div class="trow"><span class="en-t">Targeted repurchase</span><span class="zh-t">定向回购：与特定大股东协议购回股份，常见于阻止敌意收购等场景</span></div>
+    <div class="trow"><span class="en-t">Declaration / ex-dividend / record / payment date</span><span class="zh-t">宣告日 / 除息日 / 股权登记日 / 支付日：除息日前持有才享有股利，除息日价格理论上恰好下跌 DPS</span></div>
+    <div class="trow"><span class="en-t">Cum-dividend price</span><span class="zh-t">含息价格：除息日之前的股价，包含即将发放的股利；对应 ex-dividend price 除息价格</span></div>
+    <div class="trow"><span class="en-t">MM dividend irrelevance (1961)</span><span class="zh-t">MM 分配无关论：完美市场、投资政策既定下，分配政策不影响公司价值与股东财富</span></div>
+    <div class="trow"><span class="en-t">Homemade dividend</span><span class="zh-t">自制股利：投资者通过卖出（或买入）股票自行构造所需现金流，是 MM 无关论的核心机制</span></div>
+    <div class="trow"><span class="en-t">Dividend tax disadvantage</span><span class="zh-t">股利税收劣势：股利税 \(\tau_d\) 高于资本利得税 \(\tau_g\)，且不可递延，使留存优于分红</span></div>
+    <div class="trow"><span class="en-t">Dividend puzzle</span><span class="zh-t">股利之谜：存在税收劣势却仍发股利的现象，由追随者效应、信号与代理成本解释</span></div>
+    <div class="trow"><span class="en-t">Clientele effect</span><span class="zh-t">追随者效应：不同税率档位的投资者各取所需地持有不同派息政策的股票</span></div>
+    <div class="trow"><span class="en-t">Agency cost of equity / empire building</span><span class="zh-t">股权代理成本 / 帝国扩张：管理层为私利（规模、薪酬、特权）保留并滥用超额现金，如 Harford (1999) 的价值毁损并购</span></div>
+    <div class="trow"><span class="en-t">Lintner model / dividend smoothing</span><span class="zh-t">Lintner 模型 / 股利平滑：\(Div_t = Div_{t-1} + s(p \cdot EPS_t - Div_{t-1})\)，\(s \approx 0.3,\ p \approx 0.5\)，股利粘性高、远小于 EPS 的波动</span></div>
+    <div class="trow"><span class="en-t">Dividend signaling</span><span class="zh-t">股利信号：分配变化传递管理层对未来盈利的私人信息；削减股利是强负面信号</span></div>
+    <div class="trow"><span class="en-t">Share repurchase signaling</span><span class="zh-t">回购信号：无持续承诺故较弱，但低估时回购对留存股东为正 NPV，公告仍含正面信息</span></div>
+  </div>
+</div>
+
+<footer class="site">FIN 4210 · Part 3 分配政策 · 下一部分 → <a href="part4-capital-budgeting.html">Part 4 资本预算与估值</a></footer>

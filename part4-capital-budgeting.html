@@ -1,0 +1,369 @@
+<div class="hero">
+  <div class="kicker">Part 4 · Lectures 12–15</div>
+  <h1>资本预算与估值 <span class="en">Capital Budgeting &amp; Valuation</span></h1>
+  <p>资本预算是企业分析投资机会并决定是否接受的过程：<b>接受 NPV &gt; 0 的项目</b>。本部分将投资决策与融资决策分离，讲授对项目自由现金流进行估值的三种方法——<b>WACC 法、APV 法与 FTE 法</b>，以及如何估计与项目风险相匹配的资本成本。</p>
+  <p class="meta"><span class="pill">L12 增量自由现金流</span> <span class="pill">L13 三种估值方法</span> <span class="pill">L14 项目资本成本</span> <span class="pill">L15 杠杆政策与错误定价</span></p>
+</div>
+
+<h2 class="sec">本部分知识地图 <span class="en-sub">Mind Map</span></h2>
+<div class="mmap card">
+  <ul>
+    <li><span class="mm-t">起点：增量 FCF</span> <span class="mm-f">只计入"做与不做"有差别的现金流：机会成本、副作用（侵蚀/协同）要算；沉没成本、融资现金流（利息）不算 <span class="en">Incremental FCF</span></span></li>
+    <li><span class="mm-t">方法一：WACC 法</span> <span class="mm-f">用税后加权平均资本成本 r<sub>WACC</sub> 直接折现无杠杆 FCF，隐含假设恒定 D/E 比率 <span class="en">WACC method</span></span></li>
+    <li><span class="mm-t">方法二：APV 法</span> <span class="mm-l">先以 r<sub>U</sub>（全权益资本成本）对 FCF 估值得 V<sub>U</sub>，再加利息税盾现值：V<sub>L</sub> = V<sub>U</sub> + PV(ITS)。恒定债务额用 r<sub>D</sub> 折现 ITS；恒定利息保障倍数用 r<sub>U</sub> 折现 <span class="en">Adjusted Present Value</span></span></li>
+    <li><span class="mm-t">方法三：FTE 法</span> <span class="mm-f">只对股东可得的自由现金流 FCFE 折现，用权益资本成本 r<sub>E</sub> <span class="en">Flow-to-Equity</span></span></li>
+    <li><span class="mm-t">项目资本成本</span> <span class="mm-f">项目风险 ≠ 公司风险时，找可比公司（pure-play），去杠杆求 r<sub>U</sub>、再用自身杠杆重新加杠杆 <span class="en">Project cost of capital</span></span></li>
+    <li><span class="mm-t">杠杆政策</span> <span class="mm-f">预定债务额（predetermined）、恒定利息保障倍数（constant coverage）、定期调整（periodically adjusted）——影响 ITS 的风险与折现率 <span class="en">Leverage policy</span></span></li>
+    <li><span class="mm-t">终点：错误定价</span> <span class="mm-l">证券被错误定价时（如被迫以高于公允的利率借款），融资侧本身有 NPV，须计入项目总价值 <span class="en">Mispricing &amp; flotation costs</span></span></li>
+  </ul>
+</div>
+
+<h2 class="sec">1 · 增量自由现金流 <span class="en-sub">Incremental Free Cash Flow (L12)</span></h2>
+
+<div class="box def">
+  <div class="box-title">定义 · Definition</div>
+  <p><b>Incremental cash flows</b> are the changes in the firm's cash flows that occur <i>if and only if</i> the project is accepted. <span class="zh">只有"接受项目才会改变"的现金流才计入：包括<b>机会成本</b>（opportunity cost，资源因用于本项目而放弃的其他用途价值）与<b>副作用</b>（side effects，如侵蚀 erosion/同类相食 cannibalization 使原有产品销量下降、协同 synergy 使原有业务受益）。</span></p>
+</div>
+
+<div class="box key">
+  <div class="box-title">要算与不要算 · What counts</div>
+  <p><b>要算 Include：</b>机会成本（opportunity cost）、副作用 side effects（侵蚀 erosion、协同 synergy）、机会成本形式的使用资源价值。</p>
+  <p><b>不算 Exclude：</b><b>沉没成本 sunk cost</b>（已发生、无法收回的支出，与决策无关）；<b>融资成本 financing costs</b>（利息、股利等——利息的税盾效果已经体现在折现率 r<sub>WACC</sub> 或 APV 的税盾项中，若在 FCF 中再扣利息即重复计算）。</p>
+</div>
+
+<div class="box theory">
+  <div class="box-title">核心公式 · The FCF identity</div>
+  <p class="formula">\[ \text{FCF} = \text{Unlevered Net Income} + \text{Depreciation} - \text{CapEx} - \Delta\text{NWC} \]</p>
+  <p class="formula">\[ \text{Unlevered NI} = (\text{Revenue} - \text{Costs} - \text{Depreciation}) \times (1 - \tau_c) = \text{EBIT} \times (1-\tau_c) \]</p>
+  <p>其中 <span class="term">折旧税盾 Depreciation tax shield</span> = \(\tau_c \times \text{Dep}\)：折旧本身不是现金流，但它减少应税所得，从而节省税款。直觉：FCF = (Revenue − Costs)×(1−τ<sub>c</sub>) + τ<sub>c</sub>×Dep − CapEx − ΔNWC。</p>
+</div>
+
+<h3 class="sub">FCF 计算分解表 · Building the FCF line by line</h3>
+<div class="tablewrap"><table class="tb">
+  <tr><th>步骤 Step</th><th>项目 Item</th><th>说明 Note</th></tr>
+  <tr><td>1</td><td>＋ Revenue 收入</td><td>项目带来的增量收入（扣除侵蚀后的净额）</td></tr>
+  <tr><td>2</td><td>− Costs 成本</td><td>增量付现成本；机会成本在此体现</td></tr>
+  <tr><td>3</td><td>− Depreciation 折旧</td><td>非付现，只影响税</td></tr>
+  <tr class="hl"><td>4</td><td>= EBIT 息税前利润</td><td>未扣利息（利息属融资，不进 FCF）</td></tr>
+  <tr><td>5</td><td>− Tax = EBIT × τ<sub>c</sub></td><td>无杠杆情形下按 EBIT 计税</td></tr>
+  <tr class="hl"><td>6</td><td>= Unlevered NI 无杠杆净利润</td><td>EBIT × (1 − τ<sub>c</sub>)</td></tr>
+  <tr><td>7</td><td>＋ Depreciation 加回折旧</td><td>非付现费用，加回</td></tr>
+  <tr><td>8</td><td>− CapEx 资本性支出</td><td>购置设备、厂房等</td></tr>
+  <tr><td>9</td><td>− ΔNWC 净营运资本变动</td><td>存货＋应收 − 应付的增加额；项目期末通常收回（recovered）</td></tr>
+  <tr class="tot"><td>10</td><td>= FCF 自由现金流</td><td>可用于所有资本提供者分配的无杠杆现金流</td></tr>
+</table></div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 12-1a</span><span class="ex-title">设备升级：沉没成本 vs. 费用化支出</span><span class="ex-tag">L12 · Sunk cost</span></div>
+  <div class="ex-body">
+    <p class="q-en">A firm considers upgrading equipment. It already paid a <b>$10K consulting fee</b> to evaluate the project, and will incur a <b>$50K engineering fee</b> (expensed, tax-deductible at 35%) if the upgrade proceeds. New equipment costs $200K (5-yr straight-line to zero), incremental revenue +$80K/yr, incremental cash costs +$35K/yr, r = 12%, no NWC change. NPV?</p>
+    <p class="q-zh">某公司考虑升级设备。此前已支付 <b>1 万美元咨询费</b>；若升级还需支付 <b>5 万美元工程费</b>（当年费用化、税率 35% 可抵税）。新设备 20 万美元（5 年直线折旧至零残值），每年增量收入 +8 万，增量付现成本 +3.5 万，折现率 12%，无 NWC 变动。求 NPV。</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <ol class="steps">
+        <li><b>排除沉没成本：</b>1 万美元咨询费已支付、不可收回，无论是否升级都发生 → <b>不计入</b>。</li>
+        <li><b>工程费（费用化）：</b>若接受项目，t=0 现金流 = −50,000 × (1 − 0.35) = <b>−$32.5K</b>（可抵税，故只算税后净成本）。</li>
+        <li><b>年折旧：</b>200,000 / 5 = $40K/yr。EBIT = 80 − 35 − 40 = $5K；Unlevered NI = 5 × 0.65 = $3.25K。</li>
+        <li><b>FCF（每年，t=1–5）：</b>3.25 + 40 = <b>$43.25K</b>。</li>
+        <li><b>PV：</b>年金因子 A(12%, 5) = [1 − 1.12⁻⁵]/0.12 = 3.6048；PV = 43.25 × 3.6048 = $155.9K。</li>
+        <li><b>NPV</b> = 155.9 − 200 − 32.5 = <b>−$76.6K &lt; 0 → 拒绝</b>。</li>
+      </ol>
+      <p class="ans-zh">陷阱警示：若误把 10K 咨询费计入 t=0 成本，NPV 只会更低（更倾向拒绝），但不改变结论；更重要的是工程费若<b>错误地资本化</b>并按 5 年折旧抵税，会虚增税盾现值，可能把负 NPV 项目误判为可接受。</p>
+      <p class="pitfall">Pitfall：沉没成本不进现金流；费用化支出按税后金额直接计入发生当期（−50×0.65），不要既扣支出又保留全部税盾。</p>
+    </div></details>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 12-1b</span><span class="ex-title">标准 FCF 与 NPV 计算</span><span class="ex-tag">L12 · Classic</span></div>
+  <div class="ex-body">
+    <p class="q-en">A machine costs <b>$140K</b> plus <b>$4K</b> initial NWC. It adds revenue of $85K/yr and cash costs of $30K/yr for 5 years; straight-line depreciation to zero. r = 14%, τ = 39%. NPV?</p>
+    <p class="q-zh">某机器购置价 <b>14 万美元</b>，另需投入 <b>4 千美元</b>净营运资本。5 年内每年新增收入 8.5 万、新增付现成本 3 万；直线折旧至零。折现率 14%，税率 39%。求 NPV 并决策。</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <ol class="steps">
+        <li><b>折旧：</b>140,000 / 5 = $28K/yr。</li>
+        <li><b>FCF</b> = (85 − 30) × (1 − 0.39) + 0.39 × 28 = 55 × 0.61 + 10.92 = 33.55 + 10.92 = <b>$44.47K/yr</b>。折旧税盾 τ<sub>c</sub>×Dep = 10.92K 单独清晰可见。</li>
+        <li><b>初始投资（t=0）：</b>−140 − 4 = −$144K。（若第 5 年末收回 4K NWC，终年多 4K；本例按标准处理忽略残值收回，注意检查题设。）</li>
+        <li><b>年金因子：</b>A(14%, 5) = [1 − 1.14⁻⁵]/0.14 = 3.4331。</li>
+        <li><b>NPV</b> = −144 + 44.47 × 3.4331 = −144 + 152.7 = <b>+$8.7K &gt; 0 → 接受</b>。</li>
+      </ol>
+      <p class="ans-zh">把 FCF 拆成"经营贡献 (85−30)×0.61 = 33.55K"加"折旧税盾 0.39×28 = 10.92K"两部分，既能看清项目现金来自哪里，也便于敏感度分析（如折旧方法改变只影响税盾项）。</p>
+      <p class="pitfall">Pitfall：忘记期末收回 ΔNWC 会使 NPV 低估；初始 NWC 投入在 t=0，回收在最后一期，方向相反。</p>
+    </div></details>
+  </div>
+</div>
+
+<h2 class="sec">2 · WACC 法 <span class="en-sub">The WACC Method (L13)</span></h2>
+
+<div class="box def">
+  <div class="box-title">定义 · Definition</div>
+  <p>The <b>WACC method</b> discounts the project's unlevered free cash flows at the weighted average cost of capital: \( r_{\text{WACC}} = \frac{E}{E+D}\,r_E + \frac{D}{E+D}\,r_D\,(1-\tau_c) \). <span class="zh">用税后加权平均资本成本对<b>无杠杆自由现金流</b>折现；债务的节税利益已经"打包"进折现率，因此 FCF 中<b>绝不能</b>再扣利息。</span></p>
+</div>
+
+<div class="box key">
+  <div class="box-title">适用假设 · Assumptions</div>
+  <p>① 项目风险 ≈ 公司平均风险（用公司 r<sub>WACC</sub> 折现合理）；② <b>债务与权益市值比 D/E 保持恒定</b>（债务随项目价值同比例增减，即持续再平衡 rebalanced debt）；③ 只考虑公司所得税，无个人税等摩擦。估值公式：</p>
+  <p class="formula">\[ V_L = \sum_{t=1}^{n} \frac{\text{FCF}_t}{(1+r_{\text{WACC}})^t}, \qquad \text{NPV} = V_L - \text{initial investment} \]</p>
+</div>
+
+<div class="box note">
+  <div class="box-title">贯穿例：Avco RFX 项目 · Running example</div>
+  <p>Avco 公司一个 4 年期项目：t=0 投入 <b>$28M</b>（设备 24M + 税后研发费用 4M），第 1–4 年每年无杠杆 FCF <b>+$18M</b>。公司目标 D/V = 50%，r<sub>E</sub> = 10%，r<sub>D</sub> = 6%，τ<sub>c</sub> = 40%。此例贯穿 §2–§4，三种方法结果应一致。</p>
+  <p class="formula">\[ r_{\text{WACC}} = 0.5 \times 10\% + 0.5 \times 6\% \times (1-0.4) = 5\% + 1.8\% = 6.8\% \]</p>
+</div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 13-1</span><span class="ex-title">WACC 法估值 Avco RFX</span><span class="ex-tag">L13 · WACC</span></div>
+  <div class="ex-body">
+    <p class="q-en">Using r<sub>WACC</sub> = 6.8%, value Avco's RFX project: t0 = −$28M, FCF = $18M/yr for 4 years.</p>
+    <p class="q-zh">用 r<sub>WACC</sub> = 6.8% 对 Avco RFX 项目估值：t=0 投入 2800 万，第 1–4 年每年 FCF 1800 万。</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <ol class="steps">
+        <li><b>年金因子：</b>A(6.8%, 4) = [1 − 1.068⁻⁴]/0.068 = (1 − 0.7686)/0.068 = <b>3.4026</b>。</li>
+        <li><b>项目价值：</b>V<sub>L</sub> = 18 × 3.4026 = <b>$61.25M</b>。</li>
+        <li><b>NPV</b> = 61.25 − 28 = <b>+$33.25M ≈ $33.2M（与课件一致，尾差为四舍五入）→ 接受</b>。</li>
+      </ol>
+      <p class="ans-zh">WACC 法一步到位，是实务中最常用的方法；但它把税盾"藏"在折现率里，无法处理债务水平不随价值调整的情形——这正是 APV 法的用武之地。</p>
+      <p class="pitfall">Pitfall：税率 40% 只作用于债务成本项（r<sub>D</sub>(1−τ<sub>c</sub>)），不要对权益成本 r<sub>E</sub> 也乘 (1−τ<sub>c</sub>)。</p>
+    </div></details>
+  </div>
+</div>
+
+<h2 class="sec">3 · APV 法 <span class="en-sub">Adjusted Present Value (L13)</span></h2>
+
+<div class="box def">
+  <div class="box-title">定义 · Definition</div>
+  <p>The <b>APV method</b> (Myers, 1974) values the project as if all-equity financed, then adds the present value of the interest tax shields: \( V_L = V_U + \text{PV}(\text{ITS}) \). <span class="zh">分两步：第一步把 FCF 按<b>全权益资本成本 r<sub>U</sub></b>折现（不含任何杠杆收益）；第二步单独计算利息税盾 τ<sub>c</sub> × Interest 的现值并加上。优点：每一步折现率都与现金流风险匹配，可灵活处理任意杠杆政策。</span></p>
+</div>
+
+<div class="box key">
+  <div class="box-title">ITS 用哪个折现率？· Discounting the tax shield</div>
+  <p>① <b>债务水平预定/固定</b>（predetermined）：未来各年利息已知 → 税盾无风险 → 用 <b>r<sub>D</sub></b> 折现。</p>
+  <p>② <b>债务随价值持续再平衡</b>（constant D/E）：税盾与经营现金流同比例波动 → 用 <b>r<sub>U</sub></b> 折现。</p>
+  <p>③ <b>恒定利息保障倍数</b>（interest = k × FCF）：税盾 ∝ FCF → 用 <b>r<sub>U</sub></b> 折现（详见 §6）。</p>
+</div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 13-2</span><span class="ex-title">APV 法估值 Avco RFX</span><span class="ex-tag">L13 · APV</span></div>
+  <div class="ex-body">
+    <p class="q-en">Value Avco RFX with APV. r<sub>U</sub> = 8%, r<sub>D</sub> = 6%, τ<sub>c</sub> = 40%. Debt capacity is maintained at 50% of project value (rebalanced each year).</p>
+    <p class="q-zh">用 APV 法估值 Avco RFX。r<sub>U</sub> = 8%，r<sub>D</sub> = 6%，税率 40%。债务能力（debt capacity）保持为项目价值的 50%，每年随价值调整。</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <p class="ans-zh"><b>第一步：求全权益价值 V<sub>U</sub>。</b></p>
+      <ol class="steps">
+        <li>A(8%, 4) = [1 − 1.08⁻⁴]/0.08 = <b>3.3121</b>。</li>
+        <li>V<sub>U</sub> = 18 × 3.3121 = <b>$59.62M</b>。</li>
+      </ol>
+      <p class="ans-zh"><b>第二步：逐年推算债务能力与税盾（D<sub>t</sub> = 0.5 × V<sub>L</sub>，从期末倒推；利息 = 6% × 当年初债务余额，ITS = 40% × 利息）。</b></p>
+      <div class="tablewrap"><table class="tb">
+        <tr><th>年份</th><th>年末项目价值</th><th>债务余额 D（=50%V<sub>L</sub>）</th><th>利息 6%×D</th><th>ITS = 40%×利息</th></tr>
+        <tr><td>第 1 年初（t0 承担）</td><td>61.2M</td><td>30.6M</td><td>1.84M</td><td class="num">0.73M</td></tr>
+        <tr><td>第 2 年初</td><td>46.0M</td><td>23.0M</td><td>1.38M</td><td class="num">0.55M</td></tr>
+        <tr><td>第 3 年初</td><td>30.0M</td><td>15.0M</td><td>0.90M</td><td class="num">0.36M</td></tr>
+        <tr><td>第 4 年初</td><td>15.6M</td><td>7.8M</td><td>0.47M</td><td class="num">0.19M</td></tr>
+      </table></div>
+      <ol class="steps">
+        <li><b>PV(ITS)</b>：债务随价值再平衡，税盾风险与 FCF 相同 → 用 r<sub>U</sub> = 8% 折现：0.73/1.08 + 0.55/1.08² + 0.36/1.08³ + 0.19/1.08⁴ = 0.676 + 0.472 + 0.286 + 0.140 = <b>$1.57M ≈ $1.6M</b>。</li>
+        <li><b>V<sub>L</sub></b> = V<sub>U</sub> + PV(ITS) = 59.62 + 1.57 = <b>$61.19M ≈ $61.2M</b>。</li>
+        <li><b>NPV</b> = 61.2 − 28 = <b>+$33.2M ✓</b> 与 WACC 法一致（尾差为四舍五入）。</li>
+      </ol>
+      <p class="pitfall">Pitfall：这里债务是<b>每年再平衡</b>的（随价值下降而减少），所以税盾用 r<sub>U</sub> 折现；若把这笔税盾错用 r<sub>D</sub>=6% 折现，会高估杠杆收益。折现率选择取决于<b>债务政策</b>，见 §6。</p>
+    </div></details>
+  </div>
+</div>
+
+<h2 class="sec">4 · FTE 法 <span class="en-sub">Flow to Equity (L13)</span></h2>
+
+<div class="box def">
+  <div class="box-title">定义 · Definition</div>
+  <p><b>FCFE</b> (free cash flow to equity) is the portion of FCF left for shareholders after paying after-tax interest and net new borrowing: \( \text{FCFE} = \text{FCF} - (1-\tau_c)\times \text{Interest} + \text{Net Borrowing} \). <span class="zh">把无杠杆 FCF 减去税后利息（股东真实承担的利息成本），加上净新增借款（可分给股东的钱），得到<b>归属股东的现金流</b>，再用权益资本成本 r<sub>E</sub> 折现。</span></p>
+</div>
+
+<div class="box key">
+  <div class="box-title">要点 · Key points</div>
+  <p>FTE 法估值对象是<b>股东所得</b>，折现率必须用 <b>r<sub>E</sub></b>（不是 r<sub>WACC</sub>）。NPV 直接就是属于股东的净现值：NPV = PV(FCFE)（FCFE 中已含初始投资扣除净借款后的股东出资）。</p>
+</div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 13-3</span><span class="ex-title">FTE 法估值 Avco RFX</span><span class="ex-tag">L13 · FTE</span></div>
+  <div class="ex-body">
+    <p class="q-en">Value Avco RFX with FTE. r<sub>E</sub> = 10%. Debt path as in Example 13-2 (30.6 → 23.0 → 15.0 → 7.8 → 0).</p>
+    <p class="q-zh">用 FTE 法估值 Avco RFX。r<sub>E</sub> = 10%，债务路径同例 13-2（30.6 → 23.0 → 15.0 → 7.8 → 0）。</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <p class="ans-zh"><b>第 0 年：</b>股东出资 = 投资 28M − 初始借款 30.6M，故 FCFE₀ = −28 + 30.6 = <b>+2.6M</b>（项目初期股东反而先拿到净现金）。</p>
+      <ol class="steps">
+        <li><b>第 1 年：</b>FCFE = 18 − 0.6×1.84 + (23.0 − 30.6) = 18 − 1.10 − 7.6 = <b>9.30M</b>。</li>
+        <li><b>第 2 年：</b>FCFE = 18 − 0.6×0.90 + (15.0 − 23.0) = 18 − 0.54 − 8.0 = <b>9.46M</b>。</li>
+        <li><b>第 3 年：</b>FCFE = 18 − 0.6×0.47 + (7.8 − 15.0) = 18 − 0.28 − 7.2 = <b>10.52M</b>。</li>
+        <li><b>第 4 年：</b>FCFE = 18 − 0.6×0.47 + (0 − 7.8) = 18 − 0.28 − 7.8 = <b>9.92M</b>（债务全部偿还）。</li>
+        <li><b>PV @ 10%：</b>2.6 + 9.30/1.1 + 9.46/1.1² + 10.52/1.1³ + 9.92/1.1⁴ = 2.6 + 8.45 + 7.82 + 7.90 + 6.78 = <b>$33.55M ≈ $33.2–33.6M</b> ✓ 与前两法一致（尾差为四舍五入）。</li>
+      </ol>
+      <div class="tablewrap"><table class="tb">
+        <tr><th>方法</th><th>折现对象</th><th>折现率</th><th>Avco NPV</th><th>备注</th></tr>
+        <tr><td>WACC</td><td>FCF（无杠杆）</td><td>r<sub>WACC</sub> = 6.8%</td><td class="num">+33.2M</td><td>最简洁；要求恒定 D/E</td></tr>
+        <tr><td>APV</td><td>FCF → V<sub>U</sub>；ITS 单列</td><td>r<sub>U</sub> = 8%；ITS 视政策定</td><td class="num">+33.2M</td><td>最灵活；处理任意杠杆政策</td></tr>
+        <tr><td>FTE</td><td>FCFE（归股东）</td><td>r<sub>E</sub> = 10%</td><td class="num">+33.2M</td><td>直接得股东 NPV；需逐年净借款</td></tr>
+      </table></div>
+      <p class="pitfall">Pitfall：FTE 法下<b>利息必须扣税后金额</b> (1−τ<sub>c</sub>)×Interest；若扣全额利息会重复计算税盾（税盾已体现在 r<sub>E</sub> 中）。</p>
+    </div></details>
+  </div>
+</div>
+
+<h2 class="sec">5 · 项目资本成本 <span class="en-sub">Project Cost of Capital (L14)</span></h2>
+
+<div class="box def">
+  <div class="box-title">定义 · Definition</div>
+  <p>When a project's risk <b>differs</b> from the firm's average risk, the firm's WACC is inappropriate. Use <b>pure-play comparable companies</b> (firms focused on the same business) to estimate the project's cost of capital. <span class="zh">项目风险 ≠ 公司风险时（如多元化公司进入新业务），不能用公司平均 r<sub>WACC</sub> 折现；应找<b>单纯可比公司</b>估计该业务的全权益资本成本，再按<b>公司自身目标杠杆</b>重新加杠杆。</span></p>
+</div>
+
+<div class="box theory">
+  <div class="box-title">去杠杆与再加杠杆 · Unlevering &amp; relevering</div>
+  <p><b>Step 1 去杠杆</b>（对每一家可比公司，用<b>市值</b>权重）：</p>
+  <p class="formula">\[ r_U = \frac{E}{E+D}\,r_E + \frac{D}{E+D}\,r_D \]</p>
+  <p><b>Step 2 取平均</b>：r<sub>U</sub> 反映该业务（资产）风险，与各公司杠杆无关，故可平均。</p>
+  <p><b>Step 3 再加杠杆</b>（用本公司目标 D/E）：</p>
+  <p class="formula">\[ r_E = r_U + \frac{D}{E}\,(r_U - r_D) \;\Rightarrow\; r_{\text{WACC}} = \frac{E}{E+D}\,r_E + \frac{D}{E+D}\,r_D(1-\tau_c) \]</p>
+  <p class="formula">\[ \text{等价地：}\quad r_{\text{WACC}} = r_U - \tau_c\, r_D\,\frac{D}{E+D} \]</p>
+</div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 14-1</span><span class="ex-title">Avco 塑料分部：可比公司法</span><span class="ex-tag">L14 · Pure-play</span></div>
+  <div class="ex-body">
+    <p class="q-en">Avco's plastics division has two pure-play comps: C1 (E/V = 60%, r<sub>E</sub> = 12%, r<sub>D</sub> = 6%) and C2 (E/V = 75%, r<sub>E</sub> = 10.7%, r<sub>D</sub> = 5.5%). Avco targets D/V = 50%, r<sub>D</sub> = 6%, τ<sub>c</sub> = 40%. Estimate the division's r<sub>WACC</sub>.</p>
+    <p class="q-zh">Avco 塑料分部有两家可比公司：C1（E/V = 60%，r<sub>E</sub> = 12%，r<sub>D</sub> = 6%）；C2（E/V = 75%，r<sub>E</sub> = 10.7%，r<sub>D</sub> = 5.5%）。Avco 目标 D/V = 50%，r<sub>D</sub> = 6%，税率 40%。估计该分部的 r<sub>WACC</sub>。</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <ol class="steps">
+        <li><b>去杠杆 C1：</b>r<sub>U</sub> = 0.6×12% + 0.4×6% = 7.2% + 2.4% = <b>9.6%</b>。</li>
+        <li><b>去杠杆 C2：</b>r<sub>U</sub> = 0.75×10.7% + 0.25×5.5% = 8.025% + 1.375% = <b>9.4%</b>。</li>
+        <li><b>平均：</b>r<sub>U</sub> = (9.6% + 9.4%)/2 = <b>9.5%</b>。</li>
+        <li><b>按 Avco 杠杆（D/E = 1）再加杠杆：</b>r<sub>E</sub> = 9.5% + 1×(9.5% − 6%) = <b>13%</b>。</li>
+        <li><b>r<sub>WACC</sub></b> = 0.5×13% + 0.5×6%×0.6 = 6.5% + 1.8% = <b>8.3%</b>。（校验：9.5% − 0.4×6%×0.5 = 9.5% − 1.2% = 8.3% ✓）</li>
+      </ol>
+      <p class="ans-zh">结果 8.3% 高于全公司平均 r<sub>WACC</sub> = 6.8%（§2），说明塑料分部风险更高，应用 8.3% 而非 6.8% 折现其现金流——用错折现率会系统性高估高风险项目的 NPV。</p>
+      <p class="pitfall">Pitfall：权重必须用<b>市值</b>（market values）而非账面值；去杠杆时用的是可比公司自己的 E/(E+D)，再加杠杆时才换成本公司的目标杠杆。</p>
+    </div></details>
+  </div>
+</div>
+
+<h2 class="sec">6 · 杠杆政策与 APV <span class="en-sub">Leverage Policies &amp; APV (L14–15)</span></h2>
+
+<div class="box key">
+  <div class="box-title">三种债务政策 · Three leverage policies</div>
+  <p>① <b>恒定利息保障倍数 Constant interest coverage</b>：Interest = k × FCF，税盾与 FCF 同风险 → 用 r<sub>U</sub> 折现。</p>
+  <p>② <b>预定债务额 Predetermined debt levels</b>：各年债务（及利息）事先锁定 → 税盾已知 → 用 r<sub>D</sub> 折现。</p>
+  <p>③ <b>定期调整 Periodically adjusted</b>：年内债务固定、年末按目标重新调整 → 第一年内税盾确定（用 r<sub>D</sub> 折 1 期），之后按调整周期折算风险差异，因子为 ((1+r<sub>U</sub>)/(1+r<sub>D</sub>))<sup>n</sup>。</p>
+</div>
+
+<div class="box theory">
+  <div class="box-title">恒定利息保障倍数的简洁结论 · Constant coverage shortcut</div>
+  <p>若 Interest<sub>t</sub> = k × FCF<sub>t</sub>，则 ITS<sub>t</sub> = τ<sub>c</sub>·k·FCF<sub>t</sub> 与 FCF 完全成比例，风险相同，用 r<sub>U</sub> 折现：</p>
+  <p class="formula">\[ V_L = V_U + \frac{\tau_c\, k\, \overline{\text{FCF}}}{r_U} = V_U + \tau_c k\, V_U \;=\; (1+\tau_c k)\, V_U \]</p>
+  <p>推论：债务比率越高（k 越大），杠杆收益越大，但恒保障倍数下债务随现金流自动伸缩，破产风险被忽略（框架内）。</p>
+</div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 14-2</span><span class="ex-title">预定债务额：ITS 用 r<sub>D</sub> 折现</span><span class="ex-tag">L14 · Predetermined</span></div>
+  <div class="ex-body">
+    <p class="q-en">Avco instead commits to a <b>fixed</b> debt of $30.62M at t0, repaid 10M at the end of each of years 1–2 (balances 30.62 → 20.62 → 10.62). r<sub>D</sub> = 6%, τ<sub>c</sub> = 40%. PV(ITS)? Compare with the rebalanced case.</p>
+    <p class="q-zh">Avco 改为承诺 t=0 固定借款 3062 万，第 1、2 年末各偿还 1000 万（余额 30.62 → 20.62 → 10.62）。r<sub>D</sub> = 6%，税率 40%。求 PV(ITS)，并与再平衡情形（约 1.63M）比较。</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <ol class="steps">
+        <li><b>第 1 年税盾：</b>利息 = 30.62×6% = 1.84M；ITS = 40%×1.84 = <b>0.73M</b>。</li>
+        <li><b>第 2 年税盾：</b>余额 20.62M；利息 = 20.62×6% = 1.24M；ITS = 0.4×1.24 = <b>0.50M ≈ 0.48M</b>（课件口径）。</li>
+        <li><b>第 3 年税盾：</b>余额 10.62M；利息 = 10.62×6% = 0.64M；ITS = <b>0.26M ≈ 0.24M</b>（课件口径）。</li>
+        <li><b>PV(ITS)</b>：债务预定 → 用 r<sub>D</sub> = 6%：0.73/1.06 + 0.48/1.06² + 0.24/1.06³ = 0.689 + 0.427 + 0.202 ≈ <b>$1.32M</b>。</li>
+        <li><b>比较：</b>1.32M &lt; 1.63M（再平衡情形）。因为预定偿债使平均债务余额更低、杠杆收益更小——债务政策确实影响估值。</li>
+      </ol>
+      <p class="ans-zh">同样是 Avco，债务提前偿还使税盾现值减少约 0.3M；这正是 APV 法的价值：把杠杆政策单独建模，而不是把它塞进一个折现率里。</p>
+      <p class="pitfall">Pitfall：此处税盾已知且确定，<b>必须</b>用 r<sub>D</sub>=6% 折现；若沿用 §3 再平衡情形的 r<sub>U</sub>=8%，会低估杠杆收益。</p>
+    </div></details>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 15-1</span><span class="ex-title">定期调整债务：Celmax 公司</span><span class="ex-tag">L15 · Periodically adjusted</span></div>
+  <div class="ex-body">
+    <p class="q-en">Celmax has a perpetual FCF of $7.8M/yr. It maintains D = $30M, adjusted <b>annually</b> to keep the target. r<sub>U</sub> = 12%, r<sub>D</sub> = 5%, τ<sub>c</sub> = 40%. Value the firm with APV. What if debt is adjusted only every 2 years?</p>
+    <p class="q-zh">Celmax 公司有永续 FCF 每年 780 万。维持债务 3000 万，<b>每年</b>调整回目标水平。r<sub>U</sub> = 12%，r<sub>D</sub> = 5%，税率 40%。用 APV 法估值。若改为每 2 年才调整一次呢？</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <ol class="steps">
+        <li><b>全权益价值：</b>V<sub>U</sub> = 7.8/0.12 = <b>$65M</b>。</li>
+        <li><b>每年的 ITS</b> = τ<sub>c</sub> × r<sub>D</sub> × D = 0.4×5%×30 = <b>$0.6M</b>。</li>
+        <li><b>年内债务固定 → 第一年 ITS 无风险：</b>用 r<sub>D</sub> 折 1 期；此后每年重复同样的"确定一年"结构。年度调整下：PV(ITS) = [0.6/1.05] × [1/(1 − 1/1.12)] = 0.5714 × 9.0909 ≈ <b>$5.33M</b>，即 \( \dfrac{\tau_c r_D D}{r_U}\times\dfrac{1+r_U}{1+r_D} = \dfrac{0.6}{0.12}\times\dfrac{1.12}{1.05} = 5\times 1.0667 \)。</li>
+        <li><b>V<sub>L</sub></b> = 65 + 5.33 = <b>$70.33M</b>。</li>
+        <li><b>每 2 年调整：</b>确定的税盾期间变长，PV(ITS) = 5 × (1.12/1.05)² = 5 × 1.1384 ≈ <b>$5.69M</b>，V<sub>L</sub> ≈ $70.69M。调整越不频繁，税盾越接近"固定"，价值越高（极限 = 永远固定的 0.6/0.05 = $12M）。</li>
+      </ol>
+      <p class="ans-zh">因子 (1+r<sub>U</sub>)/(1+r<sub>D</sub>) 的经济含义：把"确定一年的税盾"折算成"风险化永续税盾"。税盾在年内确定（折 r<sub>D</sub>），但其永续重复的价值要与经营现金流风险可比（折 r<sub>U</sub>），两个折现率的差异就是该因子。</p>
+      <p class="pitfall">Pitfall：不要简单地把 0.6M/12% = 5M 当成 PV(ITS)——那隐含债务随价值持续再平衡；也不要用 0.6M/5% = 12M——那隐含债务永远固定。真实政策介于两者之间。</p>
+    </div></details>
+  </div>
+</div>
+
+<h2 class="sec">7 · 错误定价与发行成本 <span class="en-sub">Mispricing &amp; Flotation Costs (L15)</span></h2>
+
+<div class="box def">
+  <div class="box-title">定义 · Definition</div>
+  <p>If securities are issued at a price that <b>differs from their fair value</b>, financing itself creates (or destroys) value. The NPV of financing must be added to the NPV of the investment: \( V = V_{\text{investment}} + \text{NPV}_{\text{financing}} \). <span class="zh">当证券被<b>错误定价</b>（mispricing，如信用状况差的公司被迫以高于公允利率借款），融资安排本身有正负 NPV，必须与投资 NPV 分开计算后加总。发行成本（flotation costs，承销费、律师费等）同理直接扣减项目 NPV。</span></p>
+</div>
+
+<div class="ex">
+  <div class="ex-head"><span class="ex-no">例 15-2</span><span class="ex-title">Gap：高于公允利率的借款</span><span class="ex-tag">L15 · Mispricing</span></div>
+  <div class="ex-body">
+    <p class="q-en">Gap must borrow $100M at 6% when its fair borrowing rate is 5% (τ<sub>c</sub> = 40%, 5-year interest-only loan). What is the NPV of financing?</p>
+    <p class="q-zh">Gap 需要借款 1 亿美元，市场要求利率 6%，但其公允借款利率为 5%（税率 40%，5 年期只付息贷款）。融资的 NPV 是多少？</p>
+    <details class="ans"><summary>查看解答 / Answer</summary><div class="ans-body">
+      <ol class="steps">
+        <li><b>每年多付利息：</b>(6% − 5%)×100M = <b>$1M/yr</b>，共 5 年。</li>
+        <li><b>多付利息的现值</b>（按公允利率 5% 折现，这是资金的真实机会成本）：1 × A(5%,5) = 1 × 4.3295 = <b>$4.33M</b>。</li>
+        <li><b>额外利息带来的税盾</b>：每年多扣税 1×0.4 = 0.4M，PV = 0.4 × 4.3295 = <b>$1.73M</b>。</li>
+        <li><b>融资 NPV</b> = −4.33 + 1.73 = <b>−$2.60M</b>。若投资本身 NPV 为正且超过 2.6M，项目仍可行；否则应放弃或用其他融资方式。</li>
+      </ol>
+      <p class="ans-zh">直觉：错误定价的成本是"多付的利息"减去"多付利息省下的税"。因贷方（投资者）愿意出 6% 收 Gap 的钱，说明他们要求的回报高于公司现金流能支撑的 5%——差额的现值就是公司让渡给投资者的价值。</p>
+      <p class="pitfall">Pitfall：折现"多付利息"要用<b>公允利率 5%</b>（机会成本），不是用实际借款利率 6%——否则无法测度定价偏差本身。</p>
+    </div></details>
+  </div>
+</div>
+
+<div class="box note">
+  <div class="box-title">股权发行成本 · Equity issuance costs</div>
+  <p>股票发行有承销费（typically 5–8% of proceeds）、注册与法律费用；留存收益也有机会成本。这些成本直接减少项目 NPV：NPV<sub>调整后</sub> = NPV − Flotation Costs。融资规模越大、越依赖外部股权，发行成本越不可忽略。</p>
+</div>
+
+<h2 class="sec">8 · 常见误区 <span class="en-sub">Common Pitfalls</span></h2>
+<div class="box warn">
+  <div class="box-title">六大约命错误 · Deadly sins</div>
+  <p><b>(a) 重复计算税盾 Double-counting the tax shield：</b>WACC 法中节税利益已含在 r<sub>WACC</sub> 里，若又在 FCF 中把折旧税盾或利息税盾加回一次，即重复计算。</p>
+  <p><b>(b) ITS 折现率错误：</b>预定债务 → r<sub>D</sub>；随价值再平衡/恒定保障倍数 → r<sub>U</sub>。用错利率会系统性高估或低估杠杆收益。</p>
+  <p><b>(c) 权重用账面值：</b>WACC 与去杠杆的权重必须用<b>市值</b>；账面 D/E 通常严重失真。</p>
+  <p><b>(d) FTE 中利息未税后化：</b>FCFE 必须扣 (1−τ<sub>c</sub>)×Interest，而非全额利息。</p>
+  <p><b>(e) 忘记期末收回 ΔNWC：</b>投入营运资本在终期收回（recovery），漏记会低估 NPV。</p>
+  <p><b>(f) 税前/税后利率混用：</b>无杠杆 FCF 对应 r<sub>U</sub>/r<sub>WACC</sub>（已处理税）；杠杆化 FCFE 对应 r<sub>E</sub>；税前利率只用于与税前现金流匹配，切忌混折。</p>
+</div>
+
+<h2 class="sec">9 · 核心术语 <span class="en-sub">Key Terms Glossary</span></h2>
+<div class="card terms">
+  <div class="trow"><span class="en-t">Incremental cash flow</span><span class="zh-t">增量现金流：只有接受项目才会改变的现金流，估值的唯一相关基础</span></div>
+  <div class="trow"><span class="en-t">Opportunity cost</span><span class="zh-t">机会成本：资源用于本项目而放弃的其他用途价值，须计入 FCF</span></div>
+  <div class="trow"><span class="en-t">Sunk cost</span><span class="zh-t">沉没成本：已发生且不可收回的支出，与决策无关，不计入</span></div>
+  <div class="trow"><span class="en-t">Erosion / side effect</span><span class="zh-t">侵蚀/副作用：新项目对现有产品销量的负面（或协同的正面）影响</span></div>
+  <div class="trow"><span class="en-t">Free cash flow (FCF)</span><span class="zh-t">自由现金流：EBIT(1−τ<sub>c</sub>) + Dep − CapEx − ΔNWC，归全体资本提供者</span></div>
+  <div class="trow"><span class="en-t">Unlevered net income</span><span class="zh-t">无杠杆净利润：EBIT × (1−τ<sub>c</sub>)，不含利息的税后经营利润</span></div>
+  <div class="trow"><span class="en-t">Depreciation tax shield</span><span class="zh-t">折旧税盾：τ<sub>c</sub> × 折旧额，折旧抵税带来的现金流节约</span></div>
+  <div class="trow"><span class="en-t">Net working capital (NWC)</span><span class="zh-t">净营运资本：存货+应收−应付；其变动 ΔNWC 影响 FCF，期末通常收回</span></div>
+  <div class="trow"><span class="en-t">WACC method</span><span class="zh-t">WACC 法：用税后加权平均资本成本折现无杠杆 FCF，隐含恒定 D/E</span></div>
+  <div class="trow"><span class="en-t">APV (adjusted present value)</span><span class="zh-t">APV 法：V<sub>L</sub> = V<sub>U</sub> + PV(利息税盾)，融资与投资分开估值</span></div>
+  <div class="trow"><span class="en-t">FTE / FCFE</span><span class="zh-t">FTE 法/股权自由现金流：FCF − 税后利息 + 净借款，按 r<sub>E</sub> 折现</span></div>
+  <div class="trow"><span class="en-t">Debt capacity</span><span class="zh-t">债务能力：项目（或公司）在既定杠杆政策下可支撑的债务金额</span></div>
+  <div class="trow"><span class="en-t">Pure-play comparables</span><span class="zh-t">单纯可比公司：业务单一可比、用于估计项目资本成本的公司</span></div>
+  <div class="trow"><span class="en-t">Unlevering / relevering</span><span class="zh-t">去杠杆/再加杠杆：r<sub>U</sub>=E/(E+D)·r<sub>E</sub>+D/(E+D)·r<sub>D</sub>；r<sub>E</sub>=r<sub>U</sub>+D/E·(r<sub>U</sub>−r<sub>D</sub>)</span></div>
+  <div class="trow"><span class="en-t">Constant interest coverage</span><span class="zh-t">恒定利息保障倍数：利息 = k×FCF，税盾随现金流，V<sub>L</sub>=(1+τ<sub>c</sub>k)V<sub>U</sub></span></div>
+  <div class="trow"><span class="en-t">Predetermined debt level</span><span class="zh-t">预定债务额：债务路径事先锁定，ITS 确定，用 r<sub>D</sub> 折现</span></div>
+  <div class="trow"><span class="en-t">Periodically adjusted debt</span><span class="zh-t">定期调整债务：年内固定、期末调整，PV(ITS) 乘因子 (1+r<sub>U</sub>)/(1+r<sub>D</sub>)<sup>n</sup></span></div>
+  <div class="trow"><span class="en-t">Mispricing</span><span class="zh-t">错误定价：证券发行价偏离公允价值，融资侧本身产生 NPV</span></div>
+</div>
+
+<div class="box key">
+  <div class="box-title">本部分一句话总结 · One-line summary</div>
+  <p>先算干净的增量 FCF，再选与<b>项目风险</b>和<b>杠杆政策</b>匹配的折现框架：恒定 D/E 用 WACC，灵活杠杆用 APV，只看股东用 FTE——三法一致，殊途同归。</p>
+</div>
+
+<footer class="site">FIN 4210 · Part 4 资本预算与估值 · 下一部分 → <a href="part5-governance-ma.html">Part 5 公司治理与并购</a></footer>

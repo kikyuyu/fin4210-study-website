@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Part 1 · 资产定价回顾 Asset Pricing | FIN 4210 学习站</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body data-page="part1">
+<div id="readbar"></div>
+<header class="topbar" id="site-topbar"></header>
+<div class="layout">
+  <aside class="toc" id="site-toc"></aside>
+  <main>
+
+  <div class="hero">
+    <div class="kicker">PART 1 · LECTURES 1–5</div>
+    <h1>资产定价回顾<span style="font-size:15px;color:var(--muted);font-weight:400"> Asset Pricing Review</span></h1>
+    <p>本 Part 是公司金融的定价基础：先学会度量收益（expected return）与风险（variance / volatility），再理解分散化（diversification）为什么有效、有效前沿（efficient frontier）如何形成，最后掌握两大定价模型 <strong>CAPM</strong> 与 <strong>APT</strong>。考试大题必考 CAPM 计算 + CML/SML 作图。</p>
+    <div class="meta">
+      <span class="pill">L2 组合理论</span><span class="pill">L3 分散化</span><span class="pill">L4 CAPM</span><span class="pill">L5 APT</span>
+    </div>
+  </div>
+
+  <div class="mmap">
+    <div style="font-weight:700;color:var(--blue-deep);margin-bottom:6px">知识地图 · Mind Map</div>
+    <ul>
+      <li><span class="mm-t">收益与风险</span> — <span class="mm-f">E(r)=Σpᵢrᵢ；σ²=Σpᵢ(rᵢ−E)²</span> <span class="mm-l">协方差 Cov、相关系数 ρ∈[−1,1]</span></li>
+      <li><span class="mm-t">两资产组合</span> — <span class="mm-f">σP²=wA²σA²+wB²σB²+2wAwBρσAσB</span> <span class="mm-l">ρ 越小分散化效果越强</span></li>
+      <li><span class="mm-t">资产配置（风险资产 + 无风险资产）</span> — <span class="mm-f">CAL: E(r)=r_f+SR·σ</span> <span class="mm-l">Sharpe ratio 是斜率；最优配置最大化效用 U=E(r)−½Aσ²</span></li>
+      <li><span class="mm-t">分散化与有效前沿</span> — <span class="mm-f">MVP → efficient frontier；N→∞ 时 σP²→平均协方差</span> <span class="mm-l">特质风险可消除，系统性风险不可消除</span></li>
+      <li><span class="mm-t">CAPM</span> — <span class="mm-f">E(rᵢ)=r_f+βᵢ[E(r_M)−r_f]</span> <span class="mm-l">只有系统性风险被定价；CML 管有效组合、SML 管一切资产</span></li>
+      <li><span class="mm-t">APT 与多因子</span> — <span class="mm-f">E(r_p)=λ₀+Σb_jλ_j</span> <span class="mm-l">无套利 + 充分分散；FF3 = Market + Size + B/M</span></li>
+    </ul>
+  </div>
+
+  <!-- ==================== SECTION 1 ==================== -->
+  <h2 class="sec" id="s1"><span class="secno">1</span>收益与风险的度量<span class="en-sub">Expected Return, Variance and Volatility · Lecture 2</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 概率分布与随机变量</div>
+    <p class="en">A <strong>random variable</strong> is a variable whose values depend on outcomes of a random phenomenon (e.g., AAPL's stock return next year). The set of all possible values of a random variable, with their associated probabilities, is called the <strong>probability distribution</strong>. Probabilities are non-negative and sum to 1.</p>
+    <p>随机变量：取值依赖随机现象的变量（如下一年 AAPL 的收益率）。所有可能取值及其概率构成概率分布；各状态互斥且穷尽，故概率非负且总和为 1。</p>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 期望收益 Expected Return</div>
+    <p class="en">The <strong>expected return</strong> E(r) of an asset is the probability-weighted average return in all scenarios: \(E(r)=\sum_{i=1}^{S}p_i r_i\).</p>
+    <p>设有 S 个互斥且穷尽的状态，状态 i 的概率为 pᵢ、收益为 rᵢ，则期望收益是所有情景下按概率加权的平均收益。</p>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 方差与标准差 Variance &amp; Standard Deviation</div>
+    <p class="en">The <strong>variance</strong> is defined as the expected squared deviation of the rate of return from its expectation: \(\sigma^2[r]=E[(r-E[r])^2]=\sum_i p_i(r_i-E[r])^2\). The <strong>standard deviation</strong> is the square root of the variance; we refer to the standard deviation of a return as its <strong>volatility</strong>.</p>
+    <p>方差度量「收益偏离期望的平方的期望」，开平方后回到百分比收益的单位，称为<b>波动率</b>（volatility）。标准差是金融学中最常用的风险度量。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 1</span><span class="ex-title">XYZ 与 ABC：期望收益、方差、协方差、相关系数</span><span class="ex-tag">Lecture 2 · 课堂例题</span></div>
+    <div class="ex-body">
+      <p class="q-en">Consider the following probability distributions of the returns on XYZ Corp and ABC Corp. Calculate the expected returns, variances, standard deviations, covariance and correlation.</p>
+      <div class="tablewrap"><table class="tb">
+        <tr><th>Outcome</th><th class="num">Probability</th><th class="num">XYZ</th><th class="num">ABC</th></tr>
+        <tr><td>Boom</td><td class="num">0.2</td><td class="num">30%</td><td class="num">60%</td></tr>
+        <tr><td>Normal</td><td class="num">0.7</td><td class="num">10%</td><td class="num">10%</td></tr>
+        <tr><td>Recession</td><td class="num">0.1</td><td class="num">−20%</td><td class="num">−40%</td></tr>
+      </table></div>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <p class="q-zh"><b>中文分析</b>：先算期望，再用每个状态的偏离平方×概率求方差；协方差用「两资产偏离的乘积×概率」求和；相关系数 = 协方差 ÷ 两标准差之积。</p>
+          <ol class="steps">
+            <li>\(E(r_{XYZ})=0.2\times30+0.7\times10+0.1\times(-20)=6+7-2=\mathbf{11\%}\)</li>
+            <li>\(E(r_{ABC})=0.2\times60+0.7\times10+0.1\times(-40)=12+7-4=\mathbf{15\%}\)</li>
+            <li>\(\sigma^2_{XYZ}=0.2(30-11)^2+0.7(10-11)^2+0.1(-20-11)^2=72.2+0.7+96.1=\mathbf{169}\)，\(\sigma_{XYZ}=\sqrt{169}=\mathbf{13\%}\)</li>
+            <li>\(\sigma^2_{ABC}=0.2(60-15)^2+0.7(10-15)^2+0.1(-40-15)^2=405+17.5+302.5=\mathbf{725}\)，\(\sigma_{ABC}=\sqrt{725}\approx\mathbf{26.93\%}\)</li>
+            <li>\(Cov=0.2(19)(45)+0.7(-1)(-5)+0.1(-31)(-55)=171+3.5+170.5=\mathbf{345}\)</li>
+            <li>\(\rho=345/(13\times26.93)=345/350.0\approx\mathbf{0.986}\)（接近 1：两股几乎完全同向波动）</li>
+          </ol>
+          <div class="pitfall"><b>易错点</b>：协方差项的符号——两个状态都低于各自期望时，偏离都是负数，乘积为正（本题 Recession 状态贡献 170.5，是最大的单项）；不要把协方差除错顺序：\(\rho=Cov/(\sigma_A\sigma_B)\)，不是除以方差。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 协方差与相关系数 Covariance &amp; Correlation</div>
+    <p class="en">The <strong>covariance</strong> between stock A and stock B is a measure of co-movement: \(Cov[r_A,r_B]=E[(r_A-E[r_A])(r_B-E[r_B])]\). The <strong>correlation coefficient</strong> provides the degree of intensity of the co-movement: \(\rho_{A,B}=\dfrac{Cov[r_A,r_B]}{\sigma_A\sigma_B}\), with \(\rho\in[-1,1]\).</p>
+    <p>协方差度量同向/反向波动的「绝对量」，相关系数把它标准化到 [−1, 1]：ρ=+1 完全同向，ρ=−1 完全反向，ρ=0 无线性相关。相关系数是分散化能否奏效的关键变量。</p>
+  </div>
+
+  <!-- ==================== SECTION 2 ==================== -->
+  <h2 class="sec" id="s2"><span class="secno">2</span>随机变量的性质与两资产组合<span class="en-sub">Properties of Random Variables &amp; Two-Asset Portfolios · Lecture 2</span></h2>
+
+  <div class="card">
+    <h4 class="min" style="margin-top:0">随机变量的代数性质（X、Y 为随机变量，a、b 为常数）</h4>
+    <div class="formula">期望：\(E(a+X)=a+E(X)\)；\(\ E(aX)=aE(X)\)；\(\ E(X+Y)=E(X)+E(Y)\)；\(\ E(aX+bY)=aE(X)+bE(Y)\)</div>
+    <div class="formula">方差与协方差：\(Var(a+X)=Var(X)\)；\(\ Var(aX)=a^2Var(X)\)；\(\ Cov(aX,bY)=ab\,Cov(X,Y)\)</div>
+    <div class="formula">\(Var(aX+bY)=a^2Var(X)+b^2Var(Y)+2ab\,Cov(X,Y)\)</div>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 两资产组合的期望收益与方差</div>
+    <p>把随机变量性质应用到权重为 w_A、w_B 的组合 P（w_A + w_B = 1）：</p>
+    <div class="formula">\(E(r_P)=w_AE(r_A)+w_BE(r_B)\)</div>
+    <div class="formula">\(\sigma_P^2=w_A^2\sigma_A^2+w_B^2\sigma_B^2+2w_Aw_B\,Cov(r_A,r_B)=w_A^2\sigma_A^2+w_B^2\sigma_B^2+2w_Aw_B\,\rho_{AB}\sigma_A\sigma_B\)</div>
+    <p>注意：组合的期望收益是<b>线性</b>的（加权平均），但组合的<b>风险不是</b>——出现了协方差项，这是分散化的数学来源。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 2</span><span class="ex-title">US / JP 股票组合：均值与波动率</span><span class="ex-tag">Lecture 2 · Diversification Example</span></div>
+    <div class="ex-body">
+      <p class="q-en">Suppose we have two assets, US and JP, with E(r₁)=13.6%, σ₁=15.4%; E(r₂)=15.0%, σ₂=23.0%; and correlation ρ₁₂=0.27. If an investor holds w₁=60% in the US and w₂=40% in JP, what is the mean and volatility of the portfolio?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>\(E(r_P)=0.6\times13.6\%+0.4\times15.0\%=8.16\%+6.0\%=\mathbf{14.16\%}\)</li>
+            <li>协方差项：\(2\times0.6\times0.4\times0.27\times0.154\times0.23=0.48\times0.27\times0.03542\approx0.004591\)</li>
+            <li>方差项：\(0.6^2\times0.154^2=0.36\times0.023716=0.008538\)；\(\ 0.4^2\times0.23^2=0.16\times0.0529=0.008464\)</li>
+            <li>\(\sigma_P^2=0.008538+0.008464+0.004591=0.021593\)，\(\ \sigma_P=\sqrt{0.021593}\approx\mathbf{14.69\%}\)</li>
+            <li>结论：组合波动率 14.69% <b>小于</b>两个成分股中较小的 15.4%——分散化降低了风险，而期望收益 14.16% 介于两者之间。注意组合期望收益 14.16% 也<b>低于</b> JP 单股的 15%，说明分散化是用一点期望收益换风险下降（本例中甚至比 US 还低，因为权重偏向 US）。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>组合期望收益 <b>14.16%</b>，波动率 <b>≈14.69%</b>。低相关性（ρ=0.27）使组合风险低于任一成分股风险（15.4% / 23.0%）的加权平均，这就是 diversification 的价值。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 3 ==================== -->
+  <h2 class="sec" id="s3"><span class="secno">3</span>风险-收益权衡与资产配置<span class="en-sub">Risk-Return Trade-off &amp; Asset Allocation · Lecture 2</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 均值-方差准则 Mean-Variance Criterion</div>
+    <p class="en">For a risk-averse, expected-utility-maximizing investor, Asset A dominates Asset B if \(E(r_A)\geq E(r_B)\) and \(\sigma_A^2<\sigma_B^2\), or \(E(r_A)>E(r_B)\) and \(\sigma_A^2\leq\sigma_B^2\).</p>
+    <p>两条 Finance Axioms：<strong>investors prefer more to less</strong>（多比少好）+ <strong>investors are risk-averse</strong>（风险厌恶）。因此投资者偏好更高 E(rᵢ)、更低 σᵢ 的投资，必须在风险与收益之间 optimally trade-off 以最大化期望效用（expected utility）。常用二次效用函数：<span class="term">utility function</span> \(U=E(r)-\tfrac{1}{2}A\sigma^2\)，其中 A 为 <span class="term">risk aversion coefficient</span>（风险厌恶系数），A 越大越厌恶风险。</p>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 无差异曲线 Indifference Curves</div>
+    <p class="en">An <strong>indifference curve</strong> is a set of (E(r_P), σ_P) combinations that give an investor the same expected utility.</p>
+    <p>回顾微观经济学：对面包 B 和巧克力 C 两种商品，无差异曲线给出效用水平 U₀=U(B,C) 相同的所有组合；人们偏好处于最高的无差异曲线上（prefer more to less）。金融中把两种「商品」换成期望收益与风险：同一条无差异曲线上所有 (E(r_P), σ_P) 组合的效用相同。风险厌恶者的无差异曲线在均值-标准差空间中向上倾斜。</p>
+  </div>
+
+  <h3 class="sub" id="s3-1">风险资产与无风险资产的配置</h3>
+  <p class="src">Asset allocation across risky and risk-free portfolios · 这是本节的中心问题</p>
+  <p><span class="term">Asset allocation decision</span>（资产配置决策）指在股票、长期国债、短期国库券等<b>大类资产</b>之间的选择。本节研究最基本的情形：在 <b>risk-free securities</b>（如 T-bills）与<b>风险组合</b> P 之间分配资金。</p>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 3</span><span class="ex-title">用 P 与国库券构造目标收益 / 目标风险</span><span class="ex-tag">Lecture 2 · CAL Example</span></div>
+    <div class="ex-body">
+      <p class="q-en">Suppose a portfolio of risky stocks P is your "optimal" risky portfolio with E(r_P)=15% and σ_P=22%. The risk-free rate r_f (T-bill rate) is 7%. You have $1,000 to invest. (a) You want a 12% expected return: how should you combine P and the risk-free asset? What is the standard deviation? (b) You want a 10% standard deviation: what is the allocation and the expected return?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <p class="q-zh"><b>中文分析</b>：设 w 为投在 P 上的权重（可以 &gt;1，表示以无风险利率借钱加仓）。则 E(r)=w·E(r_P)+(1−w)·r_f，且 σ=w·σ_P（无风险资产 σ=0，无协方差项）。</p>
+          <ol class="steps">
+            <li>(a) 设 \(w\times15\%+(1-w)\times7\%=12\%\Rightarrow 8\%w=5\%\Rightarrow w=\mathbf{0.625}\)：投 $625 于 P、$375 于 T-bill。</li>
+            <li>(a) \(\sigma=w\sigma_P=0.625\times22\%=\mathbf{13.75\%}\)。</li>
+            <li>(b) \(\sigma=w\sigma_P=10\%\Rightarrow w=10/22=\mathbf{0.4545}\)：投 $454.5 于 P、$545.5 于 T-bill。</li>
+            <li>(b) \(E(r)=7\%+0.4545\times(15\%-7\%)=7\%+3.64\%=\mathbf{10.64\%}\)。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>(a) w=0.625，σ=13.75%；(b) w≈0.455，E(r)≈10.64%。w&gt;1 的情形（借款买风险资产）对应下表权重为负的 T-bill。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="tablewrap"><table class="tb">
+    <tr><th class="num">w (Portfolio P)</th><th class="num">Weight T-bill</th><th class="num">Expected Return</th><th class="num">Std. Dev.</th></tr>
+    <tr><td class="num">0</td><td class="num">1</td><td class="num">0.07</td><td class="num">0</td></tr>
+    <tr><td class="num">0.5</td><td class="num">0.5</td><td class="num">0.11</td><td class="num">0.11</td></tr>
+    <tr class="hl"><td class="num">0.625</td><td class="num">0.375</td><td class="num">0.12</td><td class="num">0.1375</td></tr>
+    <tr><td class="num">1</td><td class="num">0</td><td class="num">0.15</td><td class="num">0.22</td></tr>
+    <tr><td class="num">1.2</td><td class="num">−0.2</td><td class="num">0.166</td><td class="num">0.264</td></tr>
+    <tr><td class="num">1.4</td><td class="num">−0.4</td><td class="num">0.182</td><td class="num">0.308</td></tr>
+  </table></div>
+  <p class="src">课件 CAL 表格节选：T-bill 权重为负 = 以无风险利率<b>借款</b>（borrow）投入风险组合 P。</p>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 资本配置线 CAL 与夏普比率</div>
+    <p class="en">The <strong>Capital Allocation Line (CAL)</strong> is a plot of the risk-return combinations available by varying asset allocation between a risk-free asset and a risky portfolio, in mean-standard deviation space.</p>
+    <div class="formula">\(E(r_p)=r_f+\underbrace{\frac{E(r_A)-r_f}{\sigma_A}}_{\text{Sharpe ratio}}\sigma_p\)</div>
+    <p><span class="term">Sharpe ratio</span>（夏普比率，又称 reward-to-volatility ratio）：每单位额外标准差能换取的额外期望收益，即风险溢价与波动率之比：<span class="mm-f">SR = (E(r_P) − r_f)/σ_P</span>。它是 CAL 的斜率，度量 risk-return trade-off。</p>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 最优资产配置</div>
+    <p>CAL 上所有的配置中，哪一点最优？——使投资者效用 \(U=E(r)-\tfrac{1}{2}A\sigma^2\) 最高的那一点。把 CAL 代入效用函数，对 w（P 的权重）求最大化，可得解析解：</p>
+    <div class="formula">\(w^*=\dfrac{E(r_P)-r_f}{A\,\sigma_P^2}\)</div>
+    <p>解读：① 风险溢价 E(r_P)−r_f 越高，投风险组合越多；② 风险厌恶系数 A 越大（或波动率 σ_P 越大），投风险组合越少。该点在均值-标准差图中是 CAL 与<b>最高可达无差异曲线的切点</b>。</p>
+  </div>
+
+  <!-- ==================== SECTION 4 ==================== -->
+  <h2 class="sec" id="s4"><span class="secno">4</span>分散化与有效前沿<span class="en-sub">Diversification &amp; the Efficient Frontier · Lecture 3</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 分散化 Diversification</div>
+    <p class="en"><strong>Diversification</strong> means spreading wealth among different assets, where "different" means that the correlation between any two assets is not 1. The more dissimilar the return patterns, the greater the portfolio risk reduction achievable.</p>
+    <p>只要各资产收益不是完全正相关（ρ ≠ 1），它们的波动就会在一定程度上相互抵消。一只股票对分散化的用途会影响其价格与期望收益（后面 CAPM 会用到这一点）。</p>
+  </div>
+
+  <h3 class="sub" id="s4-1">两资产组合：相关系数的三个情形</h3>
+  <p class="src">沿用 EXAMPLE 2 的 US / JP 数据：E(r_US)=13.6%，σ_US=15.4%；E(r_JP)=15.0%，σ_JP=23.0%；w_US=0.6，w_JP=0.4</p>
+
+  <div class="tablewrap"><table class="tb">
+    <tr><th>情形</th><th>σ_P 公式</th><th class="num">σ_P 结果</th><th>含义</th></tr>
+    <tr><td><b>Case 1: ρ = +1</b></td><td>\(\sigma_P=w_1\sigma_1+w_2\sigma_2\)（无抵消）</td><td class="num">0.6×15.4% + 0.4×23% = <b>18.44%</b></td><td>组合落在两资产连线上，<b>无分散化收益</b></td></tr>
+    <tr><td><b>Case 2: ρ = −1</b></td><td>\(\sigma_P=|w_1\sigma_1-w_2\sigma_2|\)</td><td class="num">|9.24% − 9.2%| = <b>0.04%</b>≈0</td><td>风险几乎完全抵消，理论上可构造<b>零风险组合</b></td></tr>
+    <tr class="hl"><td><b>Case 3: ρ = 0.27</b></td><td>完整公式（含协方差项）</td><td class="num"><b>14.69%</b>（见 EXAMPLE 2）</td><td>现实情形：部分抵消，σ_P 小于两者加权平均</td></tr>
+  </table></div>
+  <p>把 w 从 0 变到 1 得到的所有 (σ, E(r)) 点的集合称为 <span class="term">investment opportunity set</span>（投资机会集）。ρ 越小，机会集越向左凸（同等收益下风险更低）。</p>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 有效前沿相关术语</div>
+    <ul>
+      <li><span class="term">Investment opportunity set</span>：所有可获得的风险-收益组合。</li>
+      <li><span class="term">Efficient portfolio</span>（有效组合）：给定标准差下期望收益<b>最高</b>的组合。</li>
+      <li><span class="term">Minimum variance portfolio (MVP)</span>（最小方差组合）：所有风险资产组合中<b>方差最低</b>的那个。</li>
+      <li><span class="term">Efficient frontier</span>（有效前沿）：从 MVP 出发的所有有效组合的集合——沿有效前沿要提高期望收益就必须承担更高风险。</li>
+    </ul>
+    <p><b>最优组合选择</b>：任何均值-方差投资者都应选择有效组合以享受分散化；具体选有效前沿上的哪一点，取决于投资者的<b>风险偏好</b>（risk aversion A）——效用最高的无差异曲线与有效前沿的切点。</p>
+  </div>
+
+  <h3 class="sub" id="s4-2">N 个风险资产与系统性风险分解</h3>
+  <div class="formula">三资产：\(\sigma_P^2=w_A^2\sigma_A^2+w_B^2\sigma_B^2+w_C^2\sigma_C^2+2w_Aw_B Cov_{AB}+2w_Aw_C Cov_{AC}+2w_Bw_C Cov_{BC}\)</div>
+  <div class="formula">N 资产：\(\sigma_P^2=\sum_{i=1}^{N}w_i^2\sigma_i^2+2\sum_{i=1}^{N}\sum_{j>i}w_iw_jCov(r_i,r_j)\)</div>
+  <p>组合中资产的个数 N 越多，协方差项（N(N−1)/2 个）相对方差项（N 个）增长得越快——<b>协方差主导了组合风险</b>。</p>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 等权重组合的分散化极限</div>
+    <p>等权重（1/N）持有 N 只<b>独立</b>股票：\(\sigma_P^2=\tfrac{1}{N}[\text{average variance}]\)，N→∞ 时风险被完全分散。</p>
+    <p>等权重持有 N 只<b>相关</b>股票的一般情形：</p>
+    <div class="formula">\(\sigma_P^2=\frac{1}{N}\Big[\tfrac{1}{N}\sum_i\sigma_i^2\Big]+\Big(1-\frac{1}{N}\Big)\Big[\tfrac{2}{N(N-1)}\sum_{j>i}Cov_{ij}\Big]=\frac{1}{N}[\text{avg var}]+\Big(1-\frac{1}{N}\Big)[\text{avg cov}]\)</div>
+    <p>当 N→∞：方差项 → 0，<b>组合风险 → 平均协方差</b>。因此存在无法通过分散化消除的 <span class="term">non-diversifiable risk</span>（不可分散风险）。</p>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ Theory · 风险的分解：特质风险 vs 系统性风险</div>
+    <p>把意外消息分成两类：</p>
+    <ul>
+      <li><b>公司特有（firm-specific）消息</b>：工厂失火、CEO 去世、新产品失败 ⇒ <span class="term">Firm-Specific Risk / Idiosyncratic Risk</span>（特质风险 / 异质风险）</li>
+      <li><b>影响所有投资的消息</b>：衰退、利率上升、新技术、疫情 ⇒ <span class="term">Market Risk / Systematic Risk</span>（市场风险 / 系统性风险）</li>
+    </ul>
+    <p><strong>Diversification can eliminate idiosyncratic risks but NOT systematic risks!</strong>（分散化能消除特质风险，但不能消除系统性风险。）只有系统性风险才能获得风险溢价——这是 CAPM 的核心思想。</p>
+  </div>
+
+  <!-- ==================== SECTION 5 ==================== -->
+  <h2 class="sec" id="s5"><span class="secno">5</span>资本资产定价模型 CAPM<span class="en-sub">The Capital Asset Pricing Model · Lecture 4</span></h2>
+
+  <h3 class="sub" id="s5-1">从切点组合到市场组合</h3>
+  <p>上一讲留下一个问题：<b>切点组合（tangent portfolio）如何识别？它对不同投资者是否不同？</b>——如果所有投资者对资产相关风险的度量达成一致，那就必须是同一个组合。CAPM 给出了一组假设，使所有投资者都认同切点组合就是 <span class="term">market portfolio</span> M。资产的「相关风险」= 把它纳入 M 后<b>无法被分散掉</b>的那部分风险。</p>
+  <div class="box def">
+    <div class="box-title">▸ Definition · 市场组合 M</div>
+    <p class="en">Under financial market equilibrium, the market portfolio contains <strong>all risky assets</strong>, and the weight of each asset is its market value as a percentage of total market value: \(w_i=\dfrac{\text{MV of asset }i}{\text{MV of all risky assets}}\).</p>
+    <p>均衡逻辑：风险资产的供求必须在现行价格下相等（supply = demand）；「投资者想要持有的 M」必须等于「他们实际持有的 M」。由于每只风险资产都在 M 中，M 的<b>全部风险都是系统性风险</b>——再没有分散化的余地。</p>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · CAPM 六大假设（选择题高频考点）</div>
+    <ol>
+      <li><span class="term">Mean-variance criterion</span>：投资者只以均值和方差评价风险与收益；</li>
+      <li><span class="term">Homogeneous expectations</span>（同质预期）：对收益分布拥有相同信息并以相同方式处理；</li>
+      <li>投资者是 <span class="term">price takers</span>（价格接受者），个人交易不影响价格；</li>
+      <li>可以按无风险利率<b>自由借贷</b>（borrow or lend freely）；</li>
+      <li><span class="term">Single period</span>（单期）投资期；</li>
+      <li>无税收、无交易成本（no taxes or transaction costs）。</li>
+    </ol>
+    <p>这些假设现实中显然不完全成立——任何模型都是现实的近似（any model is an approximation of reality），基于 CAPM 的结果必须视为近似。</p>
+  </div>
+
+  <h3 class="sub" id="s5-2">CML：只有有效组合有资格</h3>
+  <div class="formula">\(E(r_p)=r_f+\Big[\dfrac{E(r_M)-r_f}{\sigma_M}\Big]\sigma_p\) —— 仅对<b>有效组合</b>（rf 与 M 的组合）成立</div>
+  <p>所有投资者共享同一条有效前沿；投资者之间的差异只体现在把多少财富投在无风险资产 vs M 上。持有不在 CML 上的组合意味着承担了<b>不必要的额外风险</b>（bearing unnecessary excess risk）。</p>
+
+  <h3 class="sub" id="s5-3">市场组合风险的分解与 CAPM 推导</h3>
+  <p>N 资产组合方差的等价写法（把组合自己代入协方差）：</p>
+  <div class="formula">\(\sigma_P^2=Cov(r_P,r_P)=\sum_i w_i\,Cov(r_i,r_P)=\sum_i w_i\,\sigma_i\sigma_P\rho_{iP}\ \Rightarrow\ \sigma_P=\sum_i w_i\,\rho_{iP}\sigma_i\)</div>
+  <p>对市场组合 M：<span class="mm-f">σ_M = Σᵢ wᵢ ρᵢM σᵢ</span> —— 市场组合的波动率可以看作各成分资产「风险贡献」之和。资产 i 的总风险可分解：</p>
+  <div class="formula">\(\sigma_i=\underbrace{\rho_{iM}\sigma_i}_{\text{systematic component}}+\underbrace{(1-\rho_{iM})\sigma_i}_{\text{unsystematic (diversifiable) component}}\)</div>
+  <div class="box theory">
+    <div class="box-title">▸ Derivation · CAPM 公式推导（均衡条件）</div>
+    <p>均衡时，任意资产 i、j 的「单位系统性风险报酬」必须相等（否则就有套利/倾斜需求直到恢复均衡）：</p>
+    <div class="formula">\(\frac{E(r_i)-r_f}{\rho_{iM}\sigma_i}=\frac{E(r_j)-r_f}{\rho_{jM}\sigma_j}=\frac{E(r_M)-r_f}{\sigma_M}\)</div>
+    <p>整理：\(E(r_i)=r_f+\rho_{iM}\sigma_i\dfrac{E(r_M)-r_f}{\sigma_M}=r_f+\dfrac{\rho_{iM}\sigma_i\sigma_M}{\sigma_M^2}[E(r_M)-r_f]=r_f+\dfrac{Cov(r_i,r_M)}{\sigma_M^2}[E(r_M)-r_f]\)</p>
+    <div class="formula">\(\Rightarrow\ \boxed{E(r_i)=r_f+\beta_i\,[E(r_M)-r_f]},\qquad \beta_i\equiv\frac{Cov(r_i,r_M)}{\sigma_M^2}=\rho_{iM}\frac{\sigma_i}{\sigma_M}\)</div>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 证券市场线 SML 三要素</div>
+    <p class="en">The <strong>Security Market Line (SML)</strong> illustrates the relationship between expected return and beta: \(E(r_i)=r_f+\beta_i[E(r_M)-r_f]\).</p>
+    <p>CAPM 把期望收益拆成三部分：</p>
+    <ol>
+      <li><span class="term">Risk-free rate r_f</span>：资金的纯粹时间价值（pure time value of money）——仅仅等待而不承担任何风险的报酬；</li>
+      <li><span class="term">Market premium E(r_M) − r_f</span>：承担<b>系统性风险</b>的报酬，取决于市场参与者的平均风险厌恶（average risk aversion）；</li>
+      <li><span class="term">Beta β_i</span>：该资产系统性风险的度量——相对平均资产而言所含系统性风险的数量。风险溢价是资产与市场协方差的函数；资产间期望收益的差异完全来自 β 的差异。<b>β 越高，期望收益越高。</b></li>
+    </ol>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 特殊 β 值</div>
+    <ul>
+      <li>β=0（无风险资产）：\(E(r_i)=r_f\)</li>
+      <li>β=1（与市场同风险）：\(E(r_i)=E(r_M)\)</li>
+      <li>β&gt;1：\(E(r_i)&gt;E(r_M)\)</li>
+      <li>β&lt;1：\(E(r_i)&lt;E(r_M)\)</li>
+    </ul>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 4</span><span class="ex-title">相对 CAPM 的错误定价 Mispricing</span><span class="ex-tag">Lecture 4</span></div>
+    <div class="ex-body">
+      <p class="q-en">Suppose E(r_M)=8%, r_f=3%. A security with β=2 is offering an expected return of 15%. Is it under- or over-priced?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>CAPM 公平收益：\(E(r)=r_f+\beta(E(r_M)-r_f)=3\%+2\times(8\%-3\%)=\mathbf{13\%}\)。</li>
+            <li>实际提供 15% &gt; 公平要求 13% ⇒ 价格<b>偏低</b>（<span class="term">underpriced</span>），存在正 alpha = +2%。买入它会获得高于其所承担系统性风险的报酬。</li>
+          </ol>
+          <div class="pitfall"><b>判断口诀</b>：实际预期收益 &gt; CAPM 要求收益 → underpriced（值得买）；实际 &lt; 要求 → overpriced。画在 SML 上：位于 SML <b>上方</b> = 被低估（收益过高），下方 = 被高估。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 5</span><span class="ex-title">投资者的要求收益率 Required Return</span><span class="ex-tag">Lecture 4</span></div>
+    <div class="ex-body">
+      <p class="q-en">When assessing whether to invest in a project, an investor wants to be rewarded with an expected return commensurate with the market risk they bear. Given r_f=4%, E(r_M)−r_f=8.6%, β=1.3, what is the required return? What if we double the beta?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>\(\text{Required Return}=r_f+\beta[E(r_M)-r_f]=4\%+1.3\times8.6\%=\mathbf{15.18\%}\)</li>
+            <li>β 翻倍至 2.6：\(4\%+2.6\times8.6\%=\mathbf{22.36\%}\)（风险溢价部分翻倍）。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>要求收益率 = <b>15.18%</b>；β 翻倍后为 <b>22.36%</b>。项目评估时，期望收益必须达到 required return 才值得投。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-title">▸ 常见误区 · CML vs SML（2024 真题 T/F 全 False）</div>
+    <ol>
+      <li>「CML 能在不知道投资者风险偏好的情况下告诉我们他会选哪个组合」— <b>False</b>。CML 只描述<b>有效组合</b>的风险-收益关系；具体选 CML 上哪一点取决于个人风险厌恶 A。</li>
+      <li>「位于 CML 下方的资产永远不会被投资」— <b>False</b>。单个资产虽然位于 CML 下方，但它仍是市场组合 M 的构成部分——人人持有 M 就等于持有它。</li>
+      <li>「SML 按特质风险（idiosyncratic risk）给单个资产定价」— <b>False</b>。SML 按 β（系统性风险）定价；特质风险可通过分散化免费消除，没有溢价。</li>
+    </ol>
+    <p>对比记忆：CML 的横轴是 <b>σ（总风险）</b>、只覆盖有效组合；SML 的横轴是 <b>β（系统性风险）</b>、对一切资产与组合成立。</p>
+  </div>
+
+  <h3 class="sub" id="s5-4">（Optional）如何估计股票的 β</h3>
+  <p class="src">Lecture 4 · 时间序列回归法 · 了解即可</p>
+  <div class="formula">把 CAPM 写成回归形式：\(R_{i,t}=\alpha_i+\beta_i R_{m,t}+\epsilon_{i,t}\)</div>
+  <ul>
+    <li>\(R_{i,t}\)：资产 i 的<b>超额收益</b>（excess return）——输入；</li>
+    <li>\(\alpha_i\)：异常收益（abnormal return）——输出；</li>
+    <li>\(\beta_i\)：股票收益对市场收益的敏感度/暴露（sensitivity/exposure）——输出；</li>
+    <li>\(R_{m,t}\)：市场的超额收益——输入；\(\epsilon_{i,t}\)：特质冲击——输出。</li>
+  </ul>
+  <div class="card">
+    <h4 class="min" style="margin-top:0">三步操作流程（以月度数据为例）</h4>
+    <ol>
+      <li><b>Step 1 · 获取 \(R_{m,t}\)</b>：从 Ken French 数据库（mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html）下载月度数据，取 <span class="kbd">Mkt-RF</span> 列。</li>
+      <li><b>Step 2 · 计算 \(R_{i,t}\)</b>：\(R_{i,t}=\dfrac{P_{i,t}}{P_{i,t-1}}-1-R_f\)。用<b>调整后价格</b>（adjusted close，含分红）。若要 60 个月（如 2017/3–2022/2）的收益率，需要 61 个价格（2017/2–2022/2）。\(R_f\) 取 Ken French 数据中的 <span class="kbd">RF</span>。</li>
+      <li><b>Step 3 · 回归</b>：对 60 个观测做 OLS 回归，斜率估计值即 \(\hat\beta_i\)。</li>
+    </ol>
+  </div>
+
+  <!-- ==================== SECTION 6 ==================== -->
+  <h2 class="sec" id="s6"><span class="secno">6</span>套利定价理论 APT 与多因子模型<span class="en-sub">Arbitrage Pricing Theory &amp; Multi-Factor Models · Lecture 5</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 套利 Arbitrage（金融学理论定义）</div>
+    <p class="en">An <strong>arbitrage</strong> is a zero-investment trading strategy that generates a sure profit: no initial investment; non-negative cash flows at all times; a positive cash flow at some time.</p>
+    <p>三个特征：<b>零投资</b>、<b>各期现金流非负</b>、<b>某期现金流严格为正</b>。注意华尔街口语中的 arbitrage 也指「预期获利的策略」（<span class="term">statistical arbitrage</span>），本课采用金融学理论定义。</p>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 无套利的两大推论</div>
+    <p>金融学最重要的洞见之一：<strong>there cannot be arbitrage opportunities</strong>（否则套利者会立即交易消灭它）——称为 <span class="term">No Arbitrage Condition</span>。它有两大推论：</p>
+    <ol>
+      <li><span class="term">Law of One Price</span>（一价定律）：payoff 相同的两只证券必须有相同价格；</li>
+      <li>若某组合的 payoff 与某证券相同，该证券价格必须等于组合价格——该组合称为 <span class="term">replicating portfolio</span>（复制组合）。</li>
+    </ol>
+    <p>无套利是金融市场均衡的<b>必要条件</b>（absence of arbitrage is a necessary condition for financial market equilibrium）；套利机会即使存在也会非常短命。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 6</span><span class="ex-title">复制组合与套利：资产 A 的错误定价</span><span class="ex-tag">Lecture 5 · Example 1</span></div>
+    <div class="ex-body">
+      <p class="q-en">Asset A pays cash flows of $200 at the end of period 1 and period 2. Asset B pays $400 at the end of period 1 and costs $360; Asset C pays $400 at the end of period 2 and costs $330. (a) What is the no-arbitrage price of A? (b) Suppose A is trading at $360. Construct an arbitrage portfolio to take advantage of the mispricing.</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <p class="q-zh"><b>中文分析</b>：0.5 份 B + 0.5 份 C 的现金流恰好复制 A（每期各得 $200）。由一价定律，A 的价格必须等于复制组合成本。</p>
+          <ol class="steps">
+            <li>(a) \(P_A=0.5\times360+0.5\times330=\mathbf{\$345}\)。（对应隐含贴现率：t1 为 400/360−1=11.11%，t2 为 (400/330)^{1/2}−1≈9.97%。）</li>
+            <li>(b) A 定价 $360 &gt; $345 ⇒ A <b>被高估</b>。套利操作：<b>卖空 1 份 A（+360），买入 0.5 份 B（−180）+ 0.5 份 C（−165）</b>。</li>
+            <li>今天净现金流：+360 − 180 − 165 = <b>+$15</b>（零投资，纯获利）。</li>
+            <li>t=1：支付 A 的 200，收到 0.5×B 的 200 ⇒ 净 0；t=2 同理净 0。</li>
+            <li>所有时点现金流非负、今天为正 ⇒ 构成严格套利。</li>
+          </ol>
+          <div class="pitfall"><b>易错点</b>：复制比例按 <b>payoff 比例</b>（200/400=0.5）计算，不是按价格比例；被高估的证券要<b>卖空</b>、被低估的要买入并买入其负复制组合。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · APT（Ross, 1976）</div>
+    <p class="en">The <strong>Arbitrage Pricing Theory</strong> provides a theory of security returns which does not rely on the existence of a "market portfolio"; its implications follow from the assertion that no arbitrage opportunities exist.</p>
+    <p><b>与 CAPM 对比</b>：CAPM 是高度结构化的<b>均衡</b>模型——单一因子（市场超额收益），各资产对该因子的敏感度 β 决定期望收益；假设多且现实表现不佳。APT 假设更少、允许多个风险因子：从已实现收益的统计描述出发，运用无套利条件 + 充分分散组合中消除特质风险，得到线性多因子定价模型。</p>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ Assumptions &amp; Pricing Equation</div>
+    <p><b>Assumption 1</b>：所有投资者相信证券超额收益是同一组宏观/系统性因子的线性函数：</p>
+    <div class="formula">\(R_i=\alpha_i+b_{i1}f_1+b_{i2}f_2+\dots+b_{ik}f_k+\epsilon_i\)</div>
+    <p class="src">Rᵢ = 资产 i 超额收益；αᵢ = 常数项；fⱼ = 第 j 个共同因子；bᵢⱼ = 对因子 j 的敏感度；εᵢ = 特质波动。</p>
+    <p><b>Assumption 2（无套利）</b>：单因子世界中，充分分散的大组合 P 满足 \(R_P=\alpha_P+b_Pf_M+\epsilon_P\)，且 ε_P→0；给定任意 P 与市场组合，可构造零因子风险组合 Z（b_Z=0），无套利要求 R_Z=0——零风险组合必须给出零超额收益。</p>
+    <p><b>定价方程</b>：对任意充分分散的组合：</p>
+    <div class="formula">\(E(r_p)=\lambda_0+b_{p1}\lambda_1+b_{p2}\lambda_2+\dots+b_{pk}\lambda_k\)</div>
+    <p class="src">λ₀ = 常数，等于无风险利率 r_f；λⱼ = 因子 j 的风险溢价（所有资产共用）；bₚⱼ = 该组合的因子敏感度。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 7</span><span class="ex-title">单因子 APT：找出错误定价并套利</span><span class="ex-tag">Lecture 5 · Example 2</span></div>
+    <div class="ex-body">
+      <p class="q-en">The risk premium on a single factor is 8% and the risk-free rate is 4%. Three well-diversified portfolios: A (factor sensitivity 0.8, expected return 10.40%), B (1.0, 10%), C (1.2, 13.60%). Q1: Which portfolio is not consistent with APT? Q2: Construct an arbitrage portfolio.</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>APT 要求 E(r) = 4% + b×8%：A 应为 4+0.8×8=<b>10.4% ✓</b>；C 应为 4+1.2×8=<b>13.6% ✓</b>；B 应为 4+1.0×8=<b>12%</b>，但实际只有 <b>10% ✗</b>——B 与 APT 不一致。</li>
+            <li>B 提供的收益低于公平值 ⇒ B <b>被高估</b>（overpriced）。</li>
+            <li>构造套利组合：用 A 与 C 各 50% 组成组合 D：b_D = 0.5×0.8+0.5×1.2 = <b>1.0</b>（与 B 相同，因子风险相同），E(r_D) = 0.5×10.4+0.5×13.6 = <b>12%</b>。</li>
+            <li>交易：<b>卖出 1 单位 B（+10% 收益的头寸），买入 1 单位 D</b>。净投资 0，因子暴露 = −1.0+1.0 = 0（零因子风险），确定收益 = 12%−10% = <b>+2%</b>——严格套利。</li>
+          </ol>
+          <div class="pitfall"><b>易错点</b>：套利组合的构造要点是「<b>因子暴露清零</b>」：找到与 B 因子敏感度相同但定价不同的组合（本题 A+C 各半天然 b=1.0），做多便宜的、做空贵的。不要把「预期收益高」本身当作套利——必须同时零投资、零风险。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box note">
+    <div class="box-title">▸ Note · APT 的评论</div>
+    <ul>
+      <li>APT 的主要缺陷：<b>不指明因子是什么</b>（does not identify what the factors are）。</li>
+      <li><span class="term">Factor mimicking portfolio</span>（因子模拟组合）：收益与某因子完全正相关的组合；可用模拟组合的风险溢价作为该因子风险溢价的代理。</li>
+      <li>CAPM 是 APT 的特例：当市场组合是单因子 APT 中因子的模拟组合时，APT 退化为 CAPM。</li>
+    </ul>
+  </div>
+
+  <h3 class="sub" id="s6-1">Fama-French 三因子模型</h3>
+  <div class="tablewrap"><table class="tb">
+    <tr><th>因子</th><th>定义</th><th>公式</th></tr>
+    <tr><td><b>Factor 1 · Market 市场</b></td><td>S&amp;P 500 指数收益超出一个月 T-bill 收益的部分</td><td>\(f_{1,t}=r_{S\&P500,t}-r_{f,t}\)</td></tr>
+    <tr><td><b>Factor 2 · Size 规模</b></td><td>小市值公司收益超出大市值公司收益</td><td>\(f_{2,t}=r_{small,t}-r_{big,t}\)</td></tr>
+    <tr><td><b>Factor 3 · Book-to-Market 账面市值比</b></td><td>高 B/M 公司收益超出低 B/M 公司收益</td><td>\(f_{3,t}=r_{high,t}-r_{low,t}\)</td></tr>
+  </table></div>
+  <p class="src">动因：按市值分组的组合中，市场 β 非常相似，但小市值股票平均收益却系统性更高——CAPM 无法解释（详见下方 Optional 实证逻辑）。</p>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 8</span><span class="ex-title">用 FF3 计算 IBM 的要求收益</span><span class="ex-tag">Lecture 5 · Example 3</span></div>
+    <div class="ex-body">
+      <p class="q-en">Three factors: Market, Size, Book-to-Market, with β_IBM,1=0.75, β_IBM,2=0.18, β_IBM,3=0.26. Average premiums: r_S&amp;P500−r_f=8.6%, r_small−r_big=5.2%, r_high−r_low=4.8%. Risk-free rate r_f=4%. Compute r_IBM.</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>\(r_{IBM}=r_f+\beta_1\lambda_1+\beta_2\lambda_2+\beta_3\lambda_3\)</li>
+            <li>\(=4\%+0.75\times8.6\%+0.18\times5.2\%+0.26\times4.8\%\)</li>
+            <li>\(=4\%+6.45\%+0.936\%+1.248\%=\mathbf{12.63\%}\)</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>r_IBM ≈ <b>12.63%</b>。注意三个因子溢价分别乘各自的敏感度后相加，再加无风险利率。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ Theory ·（Optional）实证工作如何进行：从 CAPM 到 FF3</div>
+    <ol>
+      <li>观察现有模型（如 CAPM）在某个特征上定价特别差的地方，如 <b>size</b>。</li>
+      <li>「CAPM 对 size 定价差」的含义：按规模构造组合（Large → Small），小股票平均收益高、大股票低；若 CAPM 成立，小股票应有更高的 β——它们确实有，但<b>高得不足以让所有期望收益落在 SML 上</b>（系统性风险不足以解释其高收益）。</li>
+      <li>假设收益由市场 + 另一因子解释：\(E(r_i)=r_f+\beta_{i,MKT}[E(r_{mkt})-r_f]+\beta_{i,f}\lambda_f\)。若 λ_f&gt;0，该因子须满足「小股票与之高度相关、大股票与之弱相关或负相关」。</li>
+      <li><b>提取因子（Extracting the Factor）</b>：做多小股票、做空大股票——若小股票确实共同响应某因子，这个组合就把它「提取」出来；若不响应，其 β 不会解释期望收益。</li>
+      <li><b>Fama and French (1992, 1993)</b> 对 size 和 B/M 两个特征做了上述操作，提取出 size premium 与 value premium；新增两因子后定价误差（predicted return − average return）明显变小。他们不声称知道因子对应什么「投资机会」，只说「能定价就必然捕捉到了什么」。相关数据与「factor zoo」见 Ken French 数据库。</li>
+    </ol>
+  </div>
+
+  <!-- ==================== SECTION 7 ==================== -->
+  <h2 class="sec" id="s7"><span class="secno">7</span>常见误区与交叉验证<span class="en-sub">Pitfalls &amp; Cross-Checks</span></h2>
+  <div class="box warn">
+    <div class="box-title">▸ 易错清单</div>
+    <ol>
+      <li><b>把总风险当作定价依据</b>：CAPM/APT 只对<b>系统性</b>风险付溢价；σ 中可分散的部分（特质风险）没有回报。验证方法：同一 β 下比较两资产，σ 不同但公平期望收益必须相同（2025 真题第 1 题第 3 问）。</li>
+      <li><b>两资产组合公式漏乘 2</b>：协方差项是 2w_Aw_B·ρσ_Aσ_B，不是 w_Aw_B·ρσ_Aσ_B。</li>
+      <li><b>混淆 ρ 与 Cov 的作用</b>：ρ 才是分散化强弱的决定变量（标准化到 [−1,1]）；Cov 的绝对值大小不可跨资产比较。</li>
+      <li><b>CML 作图用错横轴</b>：CML 横轴是 σ（有效组合）；单个资产按总 σ 画，落在 CML 下方是正常的（SML 上才按 β 画、单个资产恰在 SML 上）。</li>
+      <li><b>APT 套利忘记清零因子暴露</b>：必须构造 b_Z=0 的组合；只做多空而不匹配敏感度不是套利。</li>
+      <li><b>误用无风险利率</b>：借款与贷出都按同一个 r_f（CAPM 假设）；w&gt;1 即以 r_f 借钱加仓。</li>
+    </ol>
+  </div>
+
+  <!-- ==================== SECTION 8 ==================== -->
+  <h2 class="sec" id="s8"><span class="secno">8</span>关键术语对照 Key Terms<span class="en-sub">Part 1 Glossary</span></h2>
+  <div class="card">
+    <div class="terms">
+      <div class="trow"><span class="en-t">Random variable / probability distribution</span><span class="zh-t">随机变量 / 概率分布</span></div>
+      <div class="trow"><span class="en-t">Expected return E(r)</span><span class="zh-t">期望收益</span></div>
+      <div class="trow"><span class="en-t">Variance / standard deviation / volatility</span><span class="zh-t">方差 / 标准差 / 波动率</span></div>
+      <div class="trow"><span class="en-t">Covariance / correlation coefficient ρ</span><span class="zh-t">协方差 / 相关系数</span></div>
+      <div class="trow"><span class="en-t">Mean-variance criterion</span><span class="zh-t">均值-方差准则</span></div>
+      <div class="trow"><span class="en-t">Risk aversion coefficient A</span><span class="zh-t">风险厌恶系数</span></div>
+      <div class="trow"><span class="en-t">Indifference curve</span><span class="zh-t">无差异曲线</span></div>
+      <div class="trow"><span class="en-t">Capital Allocation Line (CAL)</span><span class="zh-t">资本配置线</span></div>
+      <div class="trow"><span class="en-t">Sharpe ratio / reward-to-volatility</span><span class="zh-t">夏普比率 / 报酬-波动比</span></div>
+      <div class="trow"><span class="en-t">Investment opportunity set</span><span class="zh-t">投资机会集</span></div>
+      <div class="trow"><span class="en-t">Minimum variance portfolio (MVP)</span><span class="zh-t">最小方差组合</span></div>
+      <div class="trow"><span class="en-t">Efficient frontier</span><span class="zh-t">有效前沿</span></div>
+      <div class="trow"><span class="en-t">Tangent portfolio</span><span class="zh-t">切点组合</span></div>
+      <div class="trow"><span class="en-t">Two-fund separation</span><span class="zh-t">两基金分离</span></div>
+      <div class="trow"><span class="en-t">Idiosyncratic / firm-specific risk</span><span class="zh-t">特质风险 / 公司特有风险</span></div>
+      <div class="trow"><span class="en-t">Systematic / market risk</span><span class="zh-t">系统性风险 / 市场风险</span></div>
+      <div class="trow"><span class="en-t">Market portfolio M</span><span class="zh-t">市场组合</span></div>
+      <div class="trow"><span class="en-t">Capital Market Line (CML)</span><span class="zh-t">资本市场线</span></div>
+      <div class="trow"><span class="en-t">Security Market Line (SML)</span><span class="zh-t">证券市场线</span></div>
+      <div class="trow"><span class="en-t">Beta β / required return</span><span class="zh-t">贝塔 / 要求收益率</span></div>
+      <div class="trow"><span class="en-t">Underpriced / overpriced / alpha</span><span class="zh-t">定价偏低 / 偏高 / 超额收益</span></div>
+      <div class="trow"><span class="en-t">Arbitrage / no arbitrage condition</span><span class="zh-t">套利 / 无套利条件</span></div>
+      <div class="trow"><span class="en-t">Law of one price / replicating portfolio</span><span class="zh-t">一价定律 / 复制组合</span></div>
+      <div class="trow"><span class="en-t">Arbitrage Pricing Theory (APT)</span><span class="zh-t">套利定价理论</span></div>
+      <div class="trow"><span class="en-t">Factor sensitivity / factor risk premium λ</span><span class="zh-t">因子敏感度 / 因子风险溢价</span></div>
+      <div class="trow"><span class="en-t">Factor mimicking portfolio</span><span class="zh-t">因子模拟组合</span></div>
+      <div class="trow"><span class="en-t">Fama-French 3 factors (MKT/SMB/HML)</span><span class="zh-t">Fama-French 三因子</span></div>
+    </div>
+  </div>
+
+  <footer class="site">FIN 4210 · Part 1 资产定价回顾 · 下一部分 → <a href="part2-capital-structure.html">Part 2 资本结构</a></footer>
+  </main>
+</div>
+<button id="toTop" title="回到顶部">↑</button>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Part 2 · 资本结构 Capital Structure | FIN 4210 学习站</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body data-page="part2">
+<div id="readbar"></div>
+<header class="topbar" id="site-topbar"></header>
+<div class="layout">
+  <aside class="toc" id="site-toc"></aside>
+  <main>
+
+  <div class="hero">
+    <div class="kicker">PART 2 · LECTURES 6–9</div>
+    <h1>资本结构 Capital Structure</h1>
+    <p>核心问题：<b>公司是否存在最优资本结构（optimal capital structure）以最大化市场价值？</b>本 Part 按「完美市场（MM 命题）→ 引入税收（税盾）→ 引入破产成本（权衡理论）→ 引入代理问题 → 引入信息不对称（优序融资）」的顺序逐层放松假设，这是历年大题最重要的出题范围。</p>
+    <div class="meta">
+      <span class="pill">L6 MM 定理</span><span class="pill">L7 税收与困境</span><span class="pill">L8 代理问题</span><span class="pill">L9 信息不对称</span>
+    </div>
+  </div>
+
+  <div class="mmap">
+    <div style="font-weight:700;color:var(--blue-deep);margin-bottom:6px">知识地图 · Mind Map</div>
+    <ul>
+      <li><span class="mm-t">完美市场 MM</span> — <span class="mm-f">V_L=V_U；r_E=r_U+(D/E)(r_U−r_D)；WACC 与杠杆无关</span></li>
+      <li><span class="mm-t">+ 公司税</span> — <span class="mm-f">V_L=V_U+PV(ITS)；永久债务 PV(ITS)=τ_c·D；有税 WACC 随杠杆下降</span></li>
+      <li><span class="mm-t">+ 破产成本</span> — <span class="mm-f">权衡理论：V_L=V_U+PV(税盾)−PV(困境成本)</span> <span class="mm-l">解释低杠杆之谜</span></li>
+      <li><span class="mm-t">+ 代理问题</span> — <span class="mm-l">债务代理成本：risk shifting（过度投资）、debt overhang（投资不足）→ 最终股东承担；债务代理收益：ownership 集中 + free cash flow hypothesis</span></li>
+      <li><span class="mm-t">+ 信息不对称</span> — <span class="mm-l">lemons principle → 股权发行折价 → pecking order：内部资金 &gt; 债务 &gt; 股权；缓解：披露 + payout 信号</span></li>
+    </ul>
+  </div>
+
+  <!-- ==================== SECTION 1 ==================== -->
+  <h2 class="sec" id="s1"><span class="secno">1</span>资本结构导论与债务 vs 股权<span class="en-sub">Introduction &amp; Debt versus Equity · Lecture 6</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 资本结构</div>
+    <p class="en"><strong>Capital structure</strong> is the relative proportions of debt, equity, and other securities that a firm has outstanding: <strong>MV of the firm = MV of debt + MV of equity</strong>.</p>
+    <p>公司何时需要向投资者筹集现金？为新投资融资（含 R&amp;A、研发、M&amp;A）、为现有债务再融资、向供应商付款、重新优化资本结构。</p>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h5>Equity financing 股权融资</h5>
+      <p>Venture Capital（风投）→ Private Equity（私募股权）→ Initial Public Offering (IPO) → Seasoned Equity Offering (SEO，增发)。</p>
+    </div>
+    <div>
+      <h5>Debt financing 债务融资</h5>
+      <p>公司债（corporate bonds）、银行贷款（bank loans）等。</p>
+    </div>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 债务与股权的本质区别（选择高频考点）</div>
+    <ul>
+      <li><span class="term">Debt is senior to equity</span>：公司必须<b>全额偿付债权人</b>之后才能向股东（所有者）分配任何款项；</li>
+      <li><b>利息是税前扣除项</b>（tax-deductible expense）；<b>股息是利润分配</b>，不可税前扣除。</li>
+    </ul>
+    <p><b>清算优先序（priority in liquidation，从高到低）</b>：Senior Debt（Secured Creditors 有担保债权人）→ Subordinated Debt（Unsecured Creditors）→ Hybrid Debt（Convertible Securities 可转债）→ Preferred Equity（优先股）→ Common Equity（普通股）。普通股股东获得所有费用与其他索取权满足后的剩余利润；破产清算时通常什么也拿不到（usually nothing）。</p>
+  </div>
+
+  <h3 class="sub" id="s1-1">无杠杆股权 vs 杠杆股权：同一个项目</h3>
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 1</span><span class="ex-title">融资 $500M 债务前后：股权价值与期望收益</span><span class="ex-tag">Lecture 6 · 贯穿 L6–L9 的核心例子</span></div>
+    <div class="ex-body">
+      <p class="q-en">An investment generates $1,400M or $900M next year (equally likely). The cost of capital is 15% (risk premium 10% + risk-free rate 5%). (a) All-equity financing: what is the equity value and expected return? (b) Now finance $500M with debt at 5% interest: what are the values of debt and equity, and the expected return on levered equity?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>(a) 期望现金流：\(0.5\times1400+0.5\times900=1150\)M；\(V=\dfrac{1150}{1.15}=\mathbf{\$1{,}000M}\)。</li>
+            <li>(a) <span class="term">Unlevered equity</span>（无杠杆股权，公司无债）获得项目全部现金流：\(r_u=\dfrac{1150}{1000}-1=\mathbf{15\%}\)——股东因承担项目风险（risk of the project）获得相称回报。</li>
+            <li>(b) 债务无风险（两状态下都能足额偿付）：到期偿付 500×1.05 = <b>$525M</b>；\(PV(debt)=\dfrac{525}{1.05}=\$500M\)。</li>
+            <li>(b) 完美市场下 \(V_L=V_U=\$1{,}000M\)，故 \(E=1000-500=\mathbf{\$500M}\)。两状态下股权 payoff：1400−525=<b>875</b>、900−525=<b>375</b>。</li>
+            <li>(b) <span class="term">Levered equity</span>（杠杆股权）期望 payoff：\(0.5\times875+0.5\times375=625\)M；\(r_E=\dfrac{625}{500}-1=\mathbf{25\%}\)。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>(a) V=$1,000M，r_u=15%；(b) 债务 $500M、股权 $500M，r_E=25%。杠杆把股权收益从 15% 抬高到 25%——因为股东的现金流变<b>风险更高</b>了（875/375 的分布比 1400/900 更分散）。但公司总价值不变：这就是 MM 的世界。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 2 ==================== -->
+  <h2 class="sec" id="s2"><span class="secno">2</span>MM 定理：完美资本市场<span class="en-sub">MM Propositions with Perfect Capital Markets · Lecture 6</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 完美市场假设（What MM means for a perfect market）</div>
+    <ol>
+      <li>投资者可以按<b>竞争性市场价格</b>（= 未来现金流 PV，no arbitrage）交易同一组证券；</li>
+      <li>无税收、无交易成本、无发行成本（no taxes, transaction costs, or issuance costs）；</li>
+      <li>无破产成本（no bankruptcy costs）；</li>
+      <li>无代理问题（no agency problem）。</li>
+    </ol>
+    <p class="src">这是一个「极端不现实的假设给出极其有用的结果」的经典例子（a classic example of a model with extremely unrealistic assumptions providing extremely useful results）。</p>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ MM Proposition 1（无税）</div>
+    <p class="en">In a perfect capital market, the total value of a firm is equal to the market value of the total cash flows generated by its assets and is <strong>not affected by its choice of capital structure</strong>:</p>
+    <div class="formula">\(D_L+E_L=V_L=PV(\text{cash flows})=V_U=E_U\)</div>
+  </div>
+
+  <h3 class="sub" id="s2-1">资本成本与 MM 命题二</h3>
+  <div class="box def">
+    <div class="box-title">▸ Definition · 资本成本 Cost of Capital</div>
+    <p class="en">We define the <strong>cost of capital</strong> as the cost a firm incurs to raise cash, or capital, from the market.</p>
+    <p>对投资者而言要求回报率是投资的收益（benefit）；<b>对发行证券的公司而言，同一回报率就是融资的成本</b>——投资者在证券上收到的回报，正是发行该证券的公司承担的成本（the return an investor receives on a security is a cost to the firm that issues the security）。</p>
+  </div>
+  <p>把公司看作「股权 + 债务」的组合，组合（即公司/无杠杆股权）的回报是各证券回报的加权平均：</p>
+  <div class="formula">\(r_A=r_u=\frac{D_L}{D_L+E_L}r_D+\frac{E_L}{D_L+E_L}r_E\) —— 这是<b>税前 WACC</b>，完美市场中它与资本结构无关</div>
+  <div class="box theory">
+    <div class="box-title">▸ MM Proposition 2（无税）</div>
+    <p class="en">The cost of capital of levered equity increases with the firm's market value debt-to-equity ratio:</p>
+    <div class="formula">整理上式：\(r_E=r_u+\frac{D_L}{E_L}\times(r_u-r_D)\)</div>
+    <p>两点洞见：① 杠杆股权成本含两个成分——基础经营风险 r_u + 杠杆带来的额外风险溢价 (D/E)(r_u−r_D)；② 它<b>随债务股权比上升</b>。加权平均后 WACC 不变——风险只是从「公司整体」重新打包（repackaging of risk）给股东。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 2</span><span class="ex-title">HON 资本结构调整：MM 命题二应用</span><span class="ex-tag">Lecture 6 · Example</span></div>
+    <div class="ex-body">
+      <p class="q-en">Honeywell (HON) has a debt-equity ratio of 0.5, cost of debt 6.5%, cost of equity 14%. If HON issues equity, repays debt, and lowers D/E to 0.4, its debt cost falls to 5.75%. With perfect capital markets, what happens to HON's equity cost of capital and WACC?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>先求 \(r_u\)（= 当前 WACC）：\(r_u=\dfrac{1}{1.5}\times14\%+\dfrac{0.5}{1.5}\times6.5\%=9.333\%+2.167\%=\mathbf{11.5\%}\)。</li>
+            <li>新结构 D/E=0.4：\(r_E=11.5\%+0.4\times(11.5\%-5.75\%)=11.5\%+2.3\%=\mathbf{13.8\%}\)（下降）。</li>
+            <li>验证新 WACC：\(\dfrac{1}{1.4}\times13.8\%+\dfrac{0.4}{1.4}\times5.75\%=9.857\%+1.643\%=\mathbf{11.5\%}\) ✓ 不变。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>r_E 从 14% 降至 <b>13.8%</b>；WACC 恒为 <b>11.5%</b>。降杠杆使股权风险（及成本）下降，但公司总价值与整体资本成本不变——MM 命题一、二。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · Conservation of Value Principle（价值守恒原则）</div>
+    <p>With perfect capital markets, financial transactions neither add nor destroy value, but instead represent a <strong>repackaging of risk</strong>. 推论：任何看似「划算」的金融交易，一定是在利用某种<b>市场不完善</b>（market imperfection）——这是后面三章逐一引入税收、破产成本、代理问题、信息不对称的逻辑起点。</p>
+  </div>
+
+  <h3 class="sub" id="s2-2">（Optional）杠杆与无杠杆的 CAPM β</h3>
+  <p class="src">Lecture 6 · 两种证明 · 债务无风险时：β_L = (V/E)·β_U</p>
+  <div class="card">
+    <p><b>设定</b>：两家 identical 公司 U（全权益，价值 V_u）与 L（有债 D、股权 E，V_l = D + E），未来现金流同为随机变量 X&gt;0，无风险利率 r，L 的债务无风险，MM I 给出 V_u = V_l ≡ V。</p>
+    <p><b>Proof 1（从命题二出发）</b>：由 r_u = (D/V)r_f + (E/V)r_l，两边分别用 CAPM 形式 r_u = r_f+β_u(E(r_m)−r_f)、r_l = r_f+β_l(E(r_m)−r_f) 代入，消去 r_f 与 (E(r_m)−r_f)，得 β_u = (E/V)β_l ⇒ <span class="mm-f">β_l = (V/E)β_u</span>。</p>
+    <p><b>Proof 2（从协方差出发）</b>：β_u = Cov(r_m, X/V)/Var(r_m)；L 的股权收益 = (X − (1+r)D)/E，其中 (1+r)D 是常数、在协方差中消去，故 β_l = Cov(r_m, X/E)/Var(r_m) = (V/E)·Cov(r_m, X/V)/Var(r_m) = <span class="mm-f">(V/E)β_u</span>。</p>
+  </div>
+
+  <!-- ==================== SECTION 3 ==================== -->
+  <h2 class="sec" id="s3"><span class="secno">3</span>公司税与利息税盾<span class="en-sub">Corporate Taxes &amp; the Interest Tax Shield · Lecture 7</span></h2>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 税收为什么偏爱债务</div>
+    <p>公司按<b>扣除利息后</b>的利润纳税（pay taxes on profit after interest payments are deducted），因此利息费用减少了公司所得税。这创造了使用债务的激励——<b>股权融资没有这种抵税收益</b>。</p>
+  </div>
+  <p>利润表链条：Sales − COGS = Gross Profit − Operating Expenses − Depreciation &amp; Amortization = <b>Operating Income（EBIT）</b> − <b>Interest Expense</b> = <b>Earnings Before Taxes（应税所得）</b> − Tax = Net Income − Dividends = Additions to Retained Earnings。</p>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 3</span><span class="ex-title">Macy's：杠杆如何提高「投资者总可分配现金流」</span><span class="ex-tag">Lecture 7 · Income Statement Example</span></div>
+    <div class="ex-body">
+      <p class="q-en">Below is Macy's income with and without leverage (figures from the lecture slides, $ millions). Where does the additional cash flow come from?</p>
+      <div class="tablewrap"><table class="tb">
+        <tr><th></th><th class="num">With Leverage</th><th class="num">Without Leverage</th></tr>
+        <tr><td>Interest paid to debt holders</td><td class="num">430</td><td class="num">0</td></tr>
+        <tr><td>Income available to equity holders</td><td class="num">1,345</td><td class="num">1,625</td></tr>
+        <tr class="tot"><td>Total available to all investors</td><td class="num">1,775</td><td class="num">1,625</td></tr>
+      </table></div>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>总可分配现金流：有杠杆 1,775 vs 无杠杆 1,625，多出 <b>$150M</b>。</li>
+            <li>这 $150M 就是 <span class="term">interest tax shield</span>（利息税盾，税收减免）：<span class="mm-f">Interest Tax Shield = Corporate Tax Rate × Interest Payments</span>（本例隐含税率 ≈ 150/430 ≈ 35%）。</li>
+            <li>直觉：利息从应税利润中扣除，政府（Uncle Sam）分走的「饼」变小了，债权人与股东合起来能分的饼变大——公司资产的索取者从两类（股东、债权人）变成三类（+ 政府），杠杆使得到达投资者手中的部分增加。</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ MM Proposition 1 with Taxes</div>
+    <p class="en">The total value of the levered firm exceeds the unlevered value by the present value of the interest tax shield:</p>
+    <div class="formula">\(V_L=V_U+PV(\text{Interest Tax Shield})\)</div>
+    <p>税收随杠杆增加而减少，公司价值随杠杆增加而上升（tax decreases with leverage and firm value increases with leverage）。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 4</span><span class="ex-title">有限期税盾的 PV 与永久债务公式</span><span class="ex-tag">Lecture 7 · 两种算法</span></div>
+    <div class="ex-body">
+      <p class="q-en">(a) A firm plans to pay interest annually for the next 8 years and repay the principal of $1 billion in year 8. The payments are risk-free, the marginal tax rate will remain 39% throughout, and the risk-free rate is 6%. What is the PV(interest tax shield)? (b) In Modigliani and Miller (1963), assume instead the debt is a perpetuity (permanent debt). What is PV(interest tax shield) in terms of debt D, tax rate τ_c and borrowing rate r_d?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>(a) 年利息 = 6%×1,000 = $60M；年税盾 = 39%×60 = $23.4M。\(PV(ITS)=23.4\times\dfrac{1-1.06^{-8}}{0.06}=23.4\times6.2098=\mathbf{\$145.3M}\)（风险与债务相同，按 r_f=6% 折现）。</li>
+            <li>(b) 设债务 D 永久存续、公平定价（fairly priced, no arbitrage）：每年利息 = r_d·D，税盾 = τ_c·r_d·D。<b>税盾的风险 = 债务的风险</b>（why? 利息支付与债务同风险，故用 r_d 折现）：</li>
+            <li>\(PV(ITS)=\dfrac{\tau_c r_d D}{r_d}=\boxed{\tau_c D}\) ——  famously，折现率与利率相消，<b>永久债务的税盾现值 = 税率 × 债务额</b>。</li>
+            <li>(b) 数值：\(0.39\times1{,}000=\mathbf{\$390M}\)。</li>
+          </ol>
+          <div class="pitfall"><b>易错点</b>：永久债务税盾公式 PV=τ_c·D 的成立条件是「债务永远展期（permanent debt）且风险与债务相同」。有限期限的税盾必须逐年折现（如 (a)）。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ WACC with Tax（含税收的加权平均资本成本）</div>
+    <p>若债务公平定价：Market Value of Debt D = PV(未来利息支付)（利率 = 折现率）。考虑利息抵税后，债务的<b>有效税后成本</b>是 r_D(1−τ_C)：</p>
+    <div class="formula">\(r_{WACC}=\frac{E}{E+D}r_E+\frac{D}{E+D}r_D(1-\tau_c)=\underbrace{\frac{E}{E+D}r_E+\frac{D}{E+D}r_D}_{\text{pretax WACC}}-\underbrace{\frac{D}{E+D}r_D\tau_c}_{ITS\ reduction}\)</div>
+    <p>由于债务占比越高、税盾减项越大，<b>有税 WACC 随杠杆下降</b>——这正是「公司价值随杠杆上升」的另一面。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 5</span><span class="ex-title">Harris Solutions：用 WACC 法求利息税盾价值</span><span class="ex-tag">Lecture 7 · Tax Shield Using WACC</span></div>
+    <div class="ex-body">
+      <p class="q-en">Harris Solutions expects free cash flow next year of $1.75 million, growing at 3.5% per year thereafter. Cost of equity 12%; cost of debt 7%; corporate tax rate 40%. If Harris maintains a debt-equity ratio of 0.5, what is the value of its interest tax shield? (Note: debt changes each period, so directly computing PV(ITS) is inefficient.)</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <p class="q-zh"><b>中文分析</b>：恒定 D/E 意味着债务额随公司价值同步增长，直接算 PV(ITS) 很麻烦；用「WACC 法之差」：PV(ITS) = V_L − V_U。注意 V_U 用<b>税前</b> WACC 折现（无杠杆公司没有税盾）。</p>
+          <ol class="steps">
+            <li>D/E=0.5 ⇒ E/(E+D)=2/3，D/(E+D)=1/3。</li>
+            <li>税前 WACC（= 无杠杆资本成本 r_u）：\(\frac{2}{3}\times12\%+\frac{1}{3}\times7\%=8\%+2.333\%=\mathbf{10.333\%}\)。</li>
+            <li>\(V_U=\dfrac{FCF_1}{r_u-g}=\dfrac{1.75}{0.10333-0.035}=\dfrac{1.75}{0.068333}=\mathbf{\$25.61M}\)。</li>
+            <li>有税 WACC：\(\frac{2}{3}\times12\%+\frac{1}{3}\times7\%\times0.6=8\%+1.4\%=\mathbf{9.4\%}\)。</li>
+            <li>\(V_L=\dfrac{1.75}{0.094-0.035}=\dfrac{1.75}{0.059}=\mathbf{\$29.66M}\)。</li>
+            <li>\(PV(ITS)=V_L-V_U=29.66-25.61=\mathbf{\$4.05M}\)。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>利息税盾价值 ≈ <b>$4.05M</b>（V_U=$25.61M，V_L=$29.66M）。方法：恒定杠杆下用税前/税后 WACC 分别估值再取差。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 4 ==================== -->
+  <h2 class="sec" id="s4"><span class="secno">4</span>财务困境、破产成本与权衡理论<span class="en-sub">Financial Distress, Bankruptcy Costs &amp; the Trade-off Theory · Lecture 7</span></h2>
+
+  <div class="box warn">
+    <div class="box-title">▸ The Low Leverage Puzzle 低杠杆之谜</div>
+    <p>若 MM+税 成立，公司应接近 <b>100% 债务</b>；但现实中美国公司杠杆远低于税盾最优值——公司在「把钱留在桌上」（firms leave the money on the table）。原因：提高债务会提高<b>破产概率</b>；债务必须偿还（还不出 = default = bankruptcy），而股息没有这种强制义务。一定是<b>破产有成本</b>，抵消了额外债务的税收优势。⇒ 放松「无破产成本」假设。</p>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 财务困境与违约</div>
+    <p class="en"><strong>Financial distress</strong>: when a firm has difficulty meeting its debt obligations. <strong>Default</strong>: failure to make the required interest or principal payments on debt; default may trigger liquidation or reorganization (both are bankruptcy processes).</p>
+    <ul>
+      <li><span class="term">Chapter 7 · Liquidation（清算）</span>：停止经营、公司结业、变卖资产、按优先序分配给债权人；</li>
+      <li><span class="term">Chapter 11 · Reorganization（重组）</span>：公司继续经营；现金与证券价值通常低于各债权人的全部债权，但高于清算所能获得的金额。</li>
+    </ul>
+  </div>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 破产成本（直接 vs 间接）</div>
+    <ul>
+      <li><b>Direct Costs（直接成本）</b>：法律与会计专家、咨询顾问、拍卖师、投行、法院费用等。平均约占破产前总资产市值的 <b>3%–4%</b>。</li>
+      <li><b>Indirect Costs（间接成本）</b>（难以测量但金额更大）：客户/供应商/员工/应收账款的流失、资产贱卖（fire sales）、对债权人的成本。</li>
+    </ul>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 谁承担破产成本？（选择高频）</div>
+    <p>债权人购买债务时就知道违约时拿不回全部价值，因此会<b>压低初始债价</b>（−PV(expected bankruptcy costs)）。<strong>最终由股东承担破产成本</strong>（equity holders of the firm bear the bankruptcy costs）——和后面所有「债权人预期到的成本」一样，先由股东以更高融资成本的形式买单。</p>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ Trade-off Theory 权衡理论</div>
+    <p>权衡债务的收益（interest tax shield）与成本（financial distress）：</p>
+    <div class="formula">\(V_L=V_U+PV(\text{Interest Tax Shield})-PV(\text{Financial Distress Cost})\)</div>
+    <p>PV(财务困境成本) 取决于：</p>
+    <ul>
+      <li><b>困境发生的概率</b>：杠杆越高、现金流波动越大 → 概率越高；</li>
+      <li><b>困境发生时的成本大小</b>：资产有形性（asset tangibility，有形资产多→甩卖折价小）；</li>
+      <li><b>折现率</b>。</li>
+    </ul>
+    <p>图像上：V_L 先随杠杆上升（税盾主导），过最优点后下降（困境成本主导），在最优点处达到公司价值峰值——这就是<b>最优资本结构</b>。</p>
+  </div>
+
+  <!-- ==================== SECTION 5 ==================== -->
+  <h2 class="sec" id="s5"><span class="secno">5</span>代理成本：债务<span class="en-sub">Agency Cost of Debt · Lecture 8</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 代理问题来源</div>
+    <p class="en">Agency problems arise from conflicts of interest between stakeholders: <strong>equity holders vs. debt holders</strong> (agency cost of debt) and <strong>managers vs. investors</strong> (agency cost of equity).</p>
+    <p>债务代理成本的三重根源：</p>
+    <ol>
+      <li>不同证券的 <span class="term">payoff structure</span>（收益结构）不同，投资决策对股权价值与债权价值的影响不同；</li>
+      <li><span class="term">Separation of cash flow rights and control rights</span>（现金流权与控制权分离）：债权人把钱借给公司，却对公司的投资政策<b>没有发言权</b>；</li>
+      <li>股东的 <span class="term">limited liability</span>（有限责任）：最坏情况只是亏掉初始投资，公司可以宣布破产把一切都转给债权人。</li>
+    </ol>
+    <p>收益结构图：债权人的 payoff 随公司价值线性增长直到债务面值（随后封顶，形似债务）；股权的 payoff 是公司价值减去债务后的剩余（形似看涨期权：有限责任 = 下行保护 + 上行无限）。</p>
+  </div>
+
+  <h3 class="sub" id="s5-1">问题一：Risk Shifting（风险转移 / 过度投资）</h3>
+  <div class="box theory">
+    <div class="box-title">▸ 机制</div>
+    <p>债务合同<b>签订之后</b>，股东偏好<b>高风险</b>项目——目的是把财富从债权人转移到股东（transfer wealth from debt to equity）。这种行为最可能发生在<b>财务困境风险高</b>的时候。即使新项目期望 payoff <b>更低</b>、NPV 为负，只要「足够冒险」，股东也会选它：下行由债权人承接（already in distress, nothing to lose），上行归股东。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 6</span><span class="ex-title">Baxter, Inc.：困境中的风险转移</span><span class="ex-tag">Lecture 8 · Risk Shifting Example</span></div>
+    <div class="ex-body">
+      <p class="q-en">Baxter faces financial distress with an outstanding loan of $1,000 due at year-end. Two opportunities: (1) continue the current project, which pays off $900 for sure — Baxter will default; (2) switch to a new project with 50% chance of success: payoff $1,300 if successful, $300 if it fails. No initial investment required. Which project will the firm choose? Who gains and who loses?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>新项目的期望 payoff = 0.5×1300 + 0.5×300 = <b>$800</b> &lt; 旧项目的 $900——对公司整体是 <b>负 NPV</b>（期望损失 $100）。</li>
+            <li>旧项目下股权 payoff = max(900−1000, 0) = <b>$0</b>（必违约）。新项目下股权期望 payoff = 0.5×(1300−1000) + 0.5×0 = <b>$150</b>。</li>
+            <li>债权人：旧项目稳拿 $900；新项目期望回收 = 0.5×1000 + 0.5×300 = <b>$650</b>（损失 $250）。</li>
+            <li>汇总：公司整体 −100 = 债权人 −250 + 股东 +150。</li>
+            <li><b>股东会选择新项目</b>——如果维持旧项目，股东任何情况下都得不到任何东西（shareholders have nothing to lose）；新项目给了他们「捡回」$150 的机会。这就是 <span class="term">over-investment / risk shifting</span>：公司整体价值受损的决策，对股东却是理性的。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>股东选高风险新项目：公司期望损失 $100，债权人期望损失 $250，股东期望获利 $150——财富从债权人转移到股东。债权人预期到这一点，会在<b>事前</b>以折价购买债务，最终成本仍由股东承担。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <h3 class="sub" id="s5-2">问题二：Debt Overhang（债务积压 / 投资不足）</h3>
+  <div class="box theory">
+    <div class="box-title">▸ 机制</div>
+    <p>财务困境的公司往往<b>债务过重</b>：即使有 moderate profitable（正 NPV）的项目，也会放弃。原因：债权人<b>优先索取</b>现金流；在债务过重时，大部分项目收益看似归债权人，从股东角度看项目是负 NPV 的——股东不愿出资。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 7</span><span class="ex-title">Baxter 续集：正 NPV 项目为何没人投</span><span class="ex-tag">Lecture 8 · Debt Overhang Example Revisit</span></div>
+    <div class="ex-body">
+      <p class="q-en">Now suppose Baxter does NOT pursue the risky strategy. Instead it finds an opportunity requiring an initial investment of $100, guaranteed to pay off $150. Baxter has no cash and must issue new equity (sold to current shareholders). Who captures the $50 NPV?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>对公司：投入 100 稳得 150，NPV = <b>+$50</b>，且 Baxter 不会再违约——公司层面的优质项目。</li>
+            <li>债权人：回收从 $900 升到全额 $1,000，期望/确定收益 <b>+$100</b>。</li>
+            <li>股东：项目使公司额外获得 150，总资源 = 900+150 = 1050，全额偿付债务 1000 后股权 = <b>$50</b>。原股权持有人出资 $100、只回收 $50 ⇒ <b>净损失 $50</b>。</li>
+            <li>验算：NPV(+50) = 债权人 +100 − 股东 50。收益大头被债权人拿走，因为债权人优先受偿。</li>
+            <li><b>结论：股东选择不投</b>——对公司是正 NPV、对股东却是负 NPV。这就是 <span class="term">under-investment / debt overhang</span>。</li>
+          </ol>
+          <div class="pitfall"><b>注意</b>：课件原文是「Baxter 不会违约」——因为 900+150=1050 &gt; 1000，债务得以全额偿付，回收从 900 升到 1000。问「谁得到 $50 NPV」时，要把项目现金流先过一遍债务优先序再归股东。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 债务代理成本小结与缓释</div>
+    <ul>
+      <li><span class="term">Over-investment（risk shifting）</span>：困境公司可能选<b>负 NPV 但高风险</b>的项目；</li>
+      <li><span class="term">Under-investment（debt overhang）</span>：困境公司可能放弃<b>正 NPV</b>的新项目；</li>
+      <li>过高的杠杆会激励管理层与股东以<b>损害公司价值</b>的方式行事——以债权人为代价；债权人预期到这种 adverse behavior 并<b>折价买入</b>债务 ⇒ <b>最终股东承担代理成本</b>。</li>
+    </ul>
+    <p><b>缓释方式</b>：① 发行<b>短期债务</b>（期限越短，股东折腾的窗口越小）；② <span class="term">debt covenants</span>（债务契约）：债权人限制公司可采取的行动。</p>
+  </div>
+
+  <!-- ==================== SECTION 6 ==================== -->
+  <h2 class="sec" id="s6"><span class="secno">6</span>代理成本：股权与债务的代理收益<span class="en-sub">Agency Cost of Equity &amp; Agency Benefits of Debt · Lecture 8</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 股权代理成本</div>
+    <p><span class="term">Separation of ownership and control</span>（所有权与经营权分离）可能导致 <span class="term">management entrenchment</span>（管理层固化）：若面临被替换的威胁很小，经理可以按<b>自己的利益</b>经营公司。</p>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 杠杆如何缓解股权代理问题（Agency Benefits of Debt）</div>
+    <ol>
+      <li><span class="term">Concentration of ownership</span>（股权集中）：若 Ross 拥有公司 100% 并扩张，举债可保留全部所有权，同时<b>自担</b>私人享受（perks：乡村俱乐部会员、私人飞机）的全部成本；若增发股票卖出 40%，perks 成本由新老股东共同分摊——<b>发股时谁承担 perks 成本？（新股东分担 → 原有所有者放松）</b>。举债让内部人保持 100% 所有权与激励一致。</li>
+      <li><span class="term">Reduction of wasteful investment</span>（抑制浪费性投资）：对小公司而言 perks 不算大事，更严重的是经理人做出<b>毁灭价值的大型投资</b>。</li>
+    </ol>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ Empire Building 帝国建造 &amp; Free Cash Flow Hypothesis</div>
+    <p>为什么经理人做负 NPV 投资？① 经理人偏好经营<b>更大</b>的公司（更高的薪酬、声望与曝光度）；② 经理人对自己的能力过度自信（overconfident）——即使出于好意也会犯错。结果：追逐无利可图的并购与冗余雇佣。</p>
+    <p><span class="term">Free Cash Flow Hypothesis</span>（自由现金流假说）：浪费性支出在自由现金流<b>高</b>的公司更可能发生——现金紧张时，经理人有动力高效经营。<strong>Leverage reduces wasteful spending by committing the firm to future interest payments, reducing free cash flow.</strong> 财务困境的可能性还会<b>约束</b>经理人（业绩差更可能被解雇）。</p>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ 完整版权衡理论（含代理问题）</div>
+    <div class="formula">\(V_L=V_U+PV(ITS)-PV(\text{财务困境成本})-PV(\text{债务代理成本})+PV(\text{债务代理收益})\)</div>
+    <p>最优债务水平并不容易确定——加入的现实因素越多，权衡越复杂。经验规律：</p>
+    <ul>
+      <li><b>R&amp;D 密集型 / 初创公司低杠杆</b>：自由现金流低 ⇒ 税盾与债务代理收益小；人力资本高 ⇒ 困境成本高；需要不断投资 ⇒ 债务代理成本高；</li>
+      <li><b>低增长成熟公司高杠杆</b>：税盾大、债务代理收益大（自由现金流多）、困境成本低、债务代理成本低。</li>
+    </ul>
+  </div>
+
+  <!-- ==================== SECTION 7 ==================== -->
+  <h2 class="sec" id="s7"><span class="secno">7</span>信息不对称：柠檬市场与优序融资<span class="en-sub">Asymmetric Information, Lemons &amp; the Pecking Order · Lecture 9</span></h2>
+
+  <div class="box def">
+    <div class="box-title">▸ Definition · 信息不对称的两种类型</div>
+    <p>完美市场假设「所有人知道公司真实的现金流与风险、得出相同估值」。现实中<b>不同方掌握不同信息</b>：经理人对公司及未来现金流的信息优于任何人；内部人（现有股东、债权人）比外部人（潜在投资者）更知情（如 CUHKSZ 类比：校长=经理，在校生=内部股东，高中生=外部投资者）。</p>
+    <ol>
+      <li><span class="term">Moral hazard</span>（道德风险，事后 hidden action）；</li>
+      <li><span class="term">Adverse selection</span>（逆向选择，事前 hidden type）。</li>
+    </ol>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 8</span><span class="ex-title">道德风险：保险与驾驶（课堂练习）</span><span class="ex-tag">Lecture 9 · Moral Hazard</span></div>
+    <div class="ex-body">
+      <p class="q-en">It costs you $100 (psychologically) to drive safely. Your car is worth $10,000 and becomes $0 in an accident. If you drive carefully the accident probability is 5%; if not, 10%. Insurance offers: premium $500, reimbursement $10,000. With utility U = X (total wealth), compare the utility of safe vs. unsafe driving before and after buying insurance.</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li><b>买保险之前</b>：安全驾驶 EU = 10,000 − 100 = <b>9,900</b>（花钱图安心）；不安全 EU = 0.9×10,000 + 0.1×0 = <b>9,000</b>。⇒ 不买保险时会安全驾驶（9,900 &gt; 9,000）。</li>
+            <li><b>买保险之后</b>：事故损失由保险公司承担。安全驾驶 EU = 10,000 − 500 − 100 = <b>9,400</b>；不安全 EU = 10,000 − 500 = <b>9,500</b>。⇒ 买了保险反而<b>不</b>安全驾驶（9,500 &gt; 9,400）。</li>
+            <li>结论：保险改变了行为激励——这就是 <span class="term">moral hazard</span>：投保后隐藏行动（驾驶态度）使事故概率从 5% 升到 10%。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>投保前选安全驾驶（9,900 vs 9,000）；投保后选不安全驾驶（9,500 vs 9,400）。道德风险 = 事后的行为扭曲。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ Theory · Adverse Selection：Akerlof 柠檬市场</div>
+    <p>二手车市场：卖方比买方更了解车况；买方怀疑是好是坏，要求价格折扣；好车卖方不愿贱卖而退出市场；市场上<b>只剩坏车（lemons）</b>。<span class="term">Adverse selection</span>：信息不对称下，买方买到的更可能是低质量资产，因此只肯出很低的价格。</p>
+    <p><span class="term">Lemons principle</span>：当卖方拥有关于商品价值的私人信息时，买方会因逆向选择而压低出价。<span class="term">Winner's curse in IPO</span>（Rock, 1986）：作为不知情的散户，你若成功认购到 IPO 股票，应该高兴吗？——不一定：能足额买到可能正说明知情者认为它定价偏高而<b>回避</b>了。</p>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><span class="ex-no">EXAMPLE 9</span><span class="ex-title">好公司为什么不发股票：柠檬逻辑数值版</span><span class="ex-tag">Lecture 9 · Example（2024/2025 真题原型）</span></div>
+    <div class="ex-body">
+      <p class="q-en">Two firms: Good (G) true value $100, Bad (B) $50. Both have a project increasing firm value by $10, to be financed by issuing $8.5 of equity. As a potential investor who cannot tell G from B, how do you value them? Will G issue equity?</p>
+      <details class="ans"><summary>查看解答 / Answer</summary>
+        <div class="ans-body">
+          <ol class="steps">
+            <li>投资者按平均价值给两家混合估值：\(0.5\times(100+10)+0.5\times(50+10)=55+30=\mathbf{\$85}\)。</li>
+            <li>要求股份份额 = 融资额/发行后混合价值 = \(8.5/85=\mathbf{10\%}\)。</li>
+            <li>G 公司视角：项目后真实价值 110，新股东拿走 10%×110 = <b>$11</b>，老股东只剩 99 &lt; 100 ⇒ <b>净损失 $1</b>，G 不发。</li>
+            <li>B 公司视角：项目后真实价值 60，新股东拿走 6，老股东得 54 &gt; 50 ⇒ <b>净赚 $4</b>，B 发。</li>
+            <li>市场推断：看到增发即知是 B（too costly for G）→ 公告后重新估值为 $60（低于混合价 $85，股价应声下跌），新投资者此时要求份额 8.5/60 ≈ <b>14.2%</b>。</li>
+            <li>G 的替代方案：发<b>无风险债务</b>（r_f=5%，两家都还得起）——债权人不在意类型；更好的是<b>用内部留存现金</b>，完全没有信息不对称。</li>
+          </ol>
+          <div class="ans-zh"><span class="lbl">中文答案</span>混合估值 $85、份额 10%；G 发股亏 $1 不发、B 发股赚 $4 发；公告后股价跌至 $60。这就是股权发行的逆向选择折价。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="box theory">
+    <div class="box-title">▸ Pecking Order Theory 优序融资理论</div>
+    <p>考虑金融市场中普遍存在的（always the case）信息不对称，融资方式的偏好顺序为：</p>
+    <div class="formula">Retained earnings（内部留存）&gt; Debt（债务）&gt; Equity（股权）</div>
+    <p>除非经理人认为自家股票<b>被高估</b>（想想 B 公司）。数据事实：超过 <b>75%</b> 的资本支出由留存收益融资；总体上公司<b>回购股票、净发行债务</b>。</p>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">▸ Key · 信号 Signaling：好公司如何降低股权融资成本</div>
+    <ol>
+      <li><b>信息披露（signal by "say"）</b>：有用但不是完美信号——坏公司可以学舌（copy-cat），除非有法律约束（如美国 Sarbanes-Oxley Act）；有时公司事件前还有「静默期」（quiet period）不允许披露；</li>
+      <li><b>Payout policy（signal by "action"）</b>：公司常用分配政策传递自身类型（下一 Part 详述）。</li>
+    </ol>
+  </div>
+
+  <!-- ==================== SECTION 8 ==================== -->
+  <h2 class="sec" id="s8"><span class="secno">8</span>常见误区与关键术语<span class="en-sub">Pitfalls &amp; Key Terms</span></h2>
+  <div class="box warn">
+    <div class="box-title">▸ 易错清单</div>
+    <ol>
+      <li><b>完美市场中算出 WACC 变了</b>：说明算错——完美市场 WACC 恒等于 r_u，公司价值不变。换杠杆后先算新 E = V − D_new，再代 MM II 求新 r_E，回头验证 WACC。</li>
+      <li><b>税盾折现率用错</b>：与项目现金流同步波动的税盾用 r_u；固定债务计划下的税盾用 r_d（它随项目价值波动之前就已确定）。</li>
+      <li><b>PV(ITS)=τ_c·D 的适用条件</b>：永久债务。有限期债务必须逐年折现。</li>
+      <li><b>风险转移 vs 投资不足的归因</b>：都是「股权-债权利益冲突」，但方向相反——前者选了<b>不该选的坏项目</b>（负 NPV 高风险），后者放弃<b>该选的好项目</b>（正 NPV）。问「谁承担成本」时记住：债权人预期到行为并折价买债 ⇒ 股东买单。</li>
+      <li><b>柠檬例题的份额计算</b>：份额 = 融资额 ÷ <b>发行后</b>的（混合）价值；老股东损益要用<b>本公司真实价值</b>算发行后总价值再减新股东所得。</li>
+      <li><b>MVP 与最优杠杆</b>：MVP 是「方差最小」，与「公司价值最大」无关——别混淆组合理论中的 MVP 与权衡理论中的最优杠杆。</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h4 class="min" style="margin-top:0">Key Terms · Part 2</h4>
+    <div class="terms">
+      <div class="trow"><span class="en-t">Capital structure</span><span class="zh-t">资本结构</span></div>
+      <div class="trow"><span class="en-t">Debt senior to equity</span><span class="zh-t">债务优先于股权</span></div>
+      <div class="trow"><span class="en-t">Unlevered / levered equity</span><span class="zh-t">无杠杆 / 杠杆股权</span></div>
+      <div class="trow"><span class="en-t">MM Proposition 1 / 2</span><span class="zh-t">MM 命题一 / 二</span></div>
+      <div class="trow"><span class="en-t">Cost of capital / WACC</span><span class="zh-t">资本成本 / 加权平均资本成本</span></div>
+      <div class="trow"><span class="en-t">Conservation of value</span><span class="zh-t">价值守恒原则</span></div>
+      <div class="trow"><span class="en-t">Interest tax shield (ITS)</span><span class="zh-t">利息税盾</span></div>
+      <div class="trow"><span class="en-t">Permanent debt: PV(ITS)=τ_c·D</span><span class="zh-t">永久债务税盾</span></div>
+      <div class="trow"><span class="en-t">Low leverage puzzle</span><span class="zh-t">低杠杆之谜</span></div>
+      <div class="trow"><span class="en-t">Financial distress / default</span><span class="zh-t">财务困境 / 违约</span></div>
+      <div class="trow"><span class="en-t">Chapter 7 liquidation / Chapter 11 reorganization</span><span class="zh-t">清算 / 重组</span></div>
+      <div class="trow"><span class="en-t">Direct / indirect bankruptcy costs</span><span class="zh-t">直接 / 间接破产成本</span></div>
+      <div class="trow"><span class="en-t">Trade-off theory</span><span class="zh-t">权衡理论</span></div>
+      <div class="trow"><span class="en-t">Risk shifting / over-investment</span><span class="zh-t">风险转移 / 过度投资</span></div>
+      <div class="trow"><span class="en-t">Debt overhang / under-investment</span><span class="zh-t">债务积压 / 投资不足</span></div>
+      <div class="trow"><span class="en-t">Debt covenants / short-term debt</span><span class="zh-t">债务契约 / 短期债务</span></div>
+      <div class="trow"><span class="en-t">Agency cost of equity / entrenchment</span><span class="zh-t">股权代理成本 / 管理层固化</span></div>
+      <div class="trow"><span class="en-t">Empire building / free cash flow hypothesis</span><span class="zh-t">帝国建造 / 自由现金流假说</span></div>
+      <div class="trow"><span class="en-t">Moral hazard / adverse selection</span><span class="zh-t">道德风险 / 逆向选择</span></div>
+      <div class="trow"><span class="en-t">Lemons principle / winner's curse</span><span class="zh-t">柠檬原则 / 赢者诅咒</span></div>
+      <div class="trow"><span class="en-t">Pecking order theory</span><span class="zh-t">优序融资理论</span></div>
+    </div>
+  </div>
+
+  <footer class="site">FIN 4210 · Part 2 资本结构 · 下一部分 → <a href="part3-payout-policy.html">Part 3 分配政策</a></footer>
+  </main>
+</div>
+<button id="toTop" title="回到顶部">↑</button>
+</body>
+</html>
